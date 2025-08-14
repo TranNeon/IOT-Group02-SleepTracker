@@ -1,1 +1,216 @@
-[]
+[
+    {
+        "id": "981cc7521860ba69",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c5d346b3ac5a4b7f",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8a0d2cb00f2fd3ff",
+        "type": "ui_tab",
+        "name": "Login",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b3d18ad0f9d054b6",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d3bc4730c4d31cc0",
+        "type": "ui_tab",
+        "name": "Environment",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "19d02233bba54387",
+        "type": "ui_tab",
+        "name": "Sleep",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c02e9c6f2b2c5ef0",
+        "type": "ui_group",
+        "name": "Login",
+        "tab": "8a0d2cb00f2fd3ff",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "8d68a765b7923bb3",
+        "type": "ui_group",
+        "name": "Dashboard",
+        "tab": "b3d18ad0f9d054b6",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "5c6a1f14f5f3d7aa",
+        "type": "ui_template",
+        "z": "c5d346b3ac5a4b7f",
+        "group": "c02e9c6f2b2c5ef0",
+        "name": "Login Form",
+        "order": 0,
+        "width": "6",
+        "height": "6",
+        "format": "<div style=\"text-align:center\">\n    <h3>Login</h3>\n    <p><input id=\"username\" type=\"text\" placeholder=\"Username\"></p>\n    <p><input id=\"password\" type=\"password\" placeholder=\"Password\"></p>\n    <p><button id=\"loginBtn\">Login</button></p>\n    <p id=\"msg\" style=\"color:red\"></p>\n</div>\n<script>\n(function(scope) {\n    document.getElementById('loginBtn').onclick = function(){\n        scope.send({payload:{username: document.getElementById('username').value, password: document.getElementById('password').value}});\n    }\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "49bbdf3b03f5135d"
+            ]
+        ]
+    },
+    {
+        "id": "49bbdf3b03f5135d",
+        "type": "function",
+        "z": "c5d346b3ac5a4b7f",
+        "name": "Check Login",
+        "func": "if(msg.payload.username === \"admin\" && msg.payload.password === \"1234\"){\n    flow.set(\"loggedIn\",true);\n    msg.payload = {login:true};\n} else {\n    msg.payload = {login:false};\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 140,
+        "wires": [
+            [
+                "0dff95d56c0cf9d0"
+            ]
+        ]
+    },
+    {
+        "id": "0dff95d56c0cf9d0",
+        "type": "ui_template",
+        "z": "c5d346b3ac5a4b7f",
+        "group": "c02e9c6f2b2c5ef0",
+        "name": "Login Result",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "format": "<div ng-if=\"msg.payload.login===false\">\n    <p style='color:red'>Invalid username or password</p>\n</div>\n<div ng-if=\"msg.payload.login===true\">\n    <script>\n        window.location.href = '/ui';\n    </script>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "x": 710,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ccf582bf6dc82b9a",
+        "type": "inject",
+        "z": "c5d346b3ac5a4b7f",
+        "name": "Dummy Sleep Data",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "{\"sleepQuality\":47,\"envQuality\":46,\"avgDuration\":\"7h28m\",\"avgStart\":\"22h14m\",\"avgEnd\":\"5h42m\"}",
+        "payloadType": "json",
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "44c59c5fd7ee4d1e"
+            ]
+        ]
+    },
+    {
+        "id": "44c59c5fd7ee4d1e",
+        "type": "function",
+        "z": "c5d346b3ac5a4b7f",
+        "name": "Format for UI",
+        "func": "msg.payload = [\n    {topic:\"Sleep Quality\", payload: msg.payload.sleepQuality},\n    {topic:\"Env Quality\", payload: msg.payload.envQuality},\n    {topic:\"Avg Duration\", payload: msg.payload.avgDuration},\n    {topic:\"Avg Start\", payload: msg.payload.avgStart},\n    {topic:\"Avg End\", payload: msg.payload.avgEnd}\n];\nreturn [msg.payload.map(v => {return {topic:v.topic, payload:v.payload};})];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 280,
+        "wires": [
+            [
+                "edc0f0a8a2b05f9b"
+            ]
+        ]
+    },
+    {
+        "id": "edc0f0a8a2b05f9b",
+        "type": "ui_chart",
+        "z": "c5d346b3ac5a4b7f",
+        "name": "Past Week Chart",
+        "group": "8d68a765b7923bb3",
+        "order": 0,
+        "width": "12",
+        "height": "6",
+        "label": "Past Week",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "Waiting for data...",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#ff7f0e",
+            "#2ca02c",
+            "#d62728",
+            "#9467bd",
+            "#8c564b",
+            "#e377c2",
+            "#7f7f7f",
+            "#bcbd22",
+            "#17becf"
+        ],
+        "outputs": 1,
+        "x": 750,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    }
+]
