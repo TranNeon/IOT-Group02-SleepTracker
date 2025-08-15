@@ -1,23 +1,8 @@
 [
     {
-        "id": "981cc7521860ba69",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "login-flow",
         "type": "tab",
         "label": "Authentication",
-        "disabled": false,
-        "info": ""
-    },
-    {
-        "id": "dashboard-flow",
-        "type": "tab",
-        "label": "Main Dashboard",
         "disabled": false,
         "info": ""
     },
@@ -36,20 +21,35 @@
         "info": ""
     },
     {
+        "id": "e3ede8339268118c",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4e53723f2e405b89",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4c5f97a5f0e24b71",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "login-tab",
         "type": "ui_tab",
         "name": "Login",
         "icon": "dashboard",
         "order": 1,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "dashboard-tab",
-        "type": "ui_tab",
-        "name": "Dashboard",
-        "icon": "dashboard",
-        "order": 2,
         "disabled": false,
         "hidden": false
     },
@@ -176,46 +176,6 @@
         "collapse": false
     },
     {
-        "id": "dashboard-group",
-        "type": "ui_group",
-        "name": "Sleep Quality Overview",
-        "tab": "dashboard-tab",
-        "order": 1,
-        "disp": true,
-        "width": "12",
-        "collapse": false
-    },
-    {
-        "id": "stats-group",
-        "type": "ui_group",
-        "name": "Sleep Statistics",
-        "tab": "dashboard-tab",
-        "order": 2,
-        "disp": true,
-        "width": "8",
-        "collapse": false
-    },
-    {
-        "id": "charts-group",
-        "type": "ui_group",
-        "name": "Weekly Overview",
-        "tab": "dashboard-tab",
-        "order": 3,
-        "disp": true,
-        "width": "12",
-        "collapse": false
-    },
-    {
-        "id": "controls-group",
-        "type": "ui_group",
-        "name": "Controls",
-        "tab": "dashboard-tab",
-        "order": 4,
-        "disp": true,
-        "width": "12",
-        "collapse": false
-    },
-    {
         "id": "env-charts-group",
         "type": "ui_group",
         "name": "Environment Data",
@@ -226,6 +186,45 @@
         "collapse": false
     },
     {
+        "id": "07391ca88541455f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "44790f209ca2adcd",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
         "id": "sleep-charts-group",
         "type": "ui_group",
         "name": "Sleep Tracking Data",
@@ -234,6 +233,42 @@
         "disp": true,
         "width": "12",
         "collapse": false
+    },
+    {
+        "id": "923fa8921ff9b099",
+        "type": "ui_group",
+        "name": "",
+        "tab": "44790f209ca2adcd",
+        "order": 2,
+        "disp": true,
+        "width": 30,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "82d11885287ffda4",
+        "type": "ui_spacer",
+        "z": "4c5f97a5f0e24b71",
+        "name": "spacer",
+        "group": "923fa8921ff9b099",
+        "order": 7,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "0a2ef10a95340e8c",
+        "type": "ui_spacer",
+        "z": "4c5f97a5f0e24b71",
+        "name": "spacer",
+        "group": "923fa8921ff9b099",
+        "order": 3,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "75f0767f084edb2d",
+        "type": "gauth",
+        "name": "iot-sleeptracker@iot-sleeptracker-auth.iam.gserviceaccount.com"
     },
     {
         "id": "login-form",
@@ -250,13 +285,15 @@
                 "label": "Username",
                 "value": "username",
                 "type": "text",
-                "required": true
+                "required": true,
+                "rows": null
             },
             {
                 "label": "Password",
                 "value": "password",
                 "type": "password",
-                "required": true
+                "required": true,
+                "rows": null
             }
         ],
         "formValue": {
@@ -267,8 +304,11 @@
         "submit": "Login",
         "cancel": "",
         "topic": "login",
-        "x": 150,
-        "y": 100,
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 110,
+        "y": 160,
         "wires": [
             [
                 "auth-check"
@@ -280,18 +320,20 @@
         "type": "function",
         "z": "login-flow",
         "name": "Authentication Check",
-        "func": "// Simple authentication (replace with real auth system)\nconst validUsers = {\n    'admin': 'password123',\n    'user': 'sleep2024',\n    'demo': 'demo'\n};\n\nif (validUsers[msg.payload.username] === msg.payload.password) {\n    // Set authentication flag\n    flow.set('authenticated', true);\n    flow.set('currentUser', msg.payload.username);\n    \n    msg.payload = {\n        success: true,\n        message: 'Login successful! Please navigate to Dashboard tab to continue.',\n        user: msg.payload.username\n    };\n    \n    // Trigger dashboard data initialization\n    node.send([msg, {topic: 'init-dashboard', payload: true}]);\n} else {\n    msg.payload = {\n        success: false,\n        message: 'Invalid username or password. Please try again.'\n    };\n    node.send([msg, null]);\n}\n\nreturn null;",
+        "func": "// default is admin admin\nconst validUsers = global.get('auth')\n.reduce((prev, cur) => \n{prev[cur[0]]=cur[1]; return prev}, {});\n\nif (validUsers[msg.payload.username] === msg.payload.password) {\n    global.set('authenticated', true);\n    global.set('currentUser', msg.payload.username);\n    \n    msg.payload = {\n        message: 'Login successful! Please navigate to Dashboard tab to continue.',\n        user: msg.payload.username\n    };\n    \n   return msg;\n} else {\n    msg.payload = {\n        message: 'Invalid username or password. Please try again.'\n    };\n    return msg;\n}\n\nreturn null;",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
-        "x": 350,
-        "y": 100,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 160,
         "wires": [
             [
                 "login-result"
             ],
-            [
-                "dashboard-init-trigger"
-            ]
+            []
         ]
     },
     {
@@ -306,357 +348,40 @@
         "label": "Status:",
         "format": "{{msg.payload.message}}",
         "layout": "row-spread",
-        "x": 550,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "dashboard-init-trigger",
-        "type": "link out",
-        "z": "login-flow",
-        "name": "Dashboard Init Link",
-        "links": [
-            "dashboard-link-in"
-        ],
-        "x": 550,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "dashboard-link-in",
-        "type": "link in",
-        "z": "dashboard-flow",
-        "name": "Dashboard Link In",
-        "links": [
-            "dashboard-init-trigger"
-        ],
-        "x": 100,
-        "y": 50,
-        "wires": [
-            [
-                "dashboard-init"
-            ]
-        ]
-    },
-    {
-        "id": "manual-dashboard-init",
-        "type": "inject",
-        "z": "dashboard-flow",
-        "name": "Manual Dashboard Load",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "manual-init",
-        "payload": "true",
-        "payloadType": "bool",
-        "x": 180,
-        "y": 100,
-        "wires": [
-            [
-                "auth-guard"
-            ]
-        ]
-    },
-    {
-        "id": "auth-guard",
-        "type": "function",
-        "z": "dashboard-flow",
-        "name": "Authentication Guard",
-        "func": "if (!flow.get('authenticated')) {\n    msg.payload = 'Please login first on the Login tab';\n    return [null, msg];\n}\nreturn [msg, null];",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 350,
-        "y": 100,
-        "wires": [
-            [
-                "dashboard-init"
-            ],
-            [
-                "login-redirect"
-            ]
-        ]
-    },
-    {
-        "id": "login-redirect",
-        "type": "ui_text",
-        "z": "dashboard-flow",
-        "group": "dashboard-group",
-        "order": 0,
-        "width": 12,
-        "height": 1,
-        "name": "Auth Required Message",
-        "label": "Authentication Required:",
-        "format": "{{msg.payload}}",
-        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
         "x": 570,
-        "y": 130,
+        "y": 160,
         "wires": []
     },
     {
-        "id": "dashboard-init",
-        "type": "function",
-        "z": "dashboard-flow",
-        "name": "Initialize Dashboard",
-        "func": "// Generate sample sleep data\nconst sleepData = {\n    avgDuration: '7h28m',\n    avgStart: '22h14m',\n    avgEnd: '5h42m',\n    sleepQuality: 47,\n    envQuality: 46,\n    weekData: [\n        {x: 1, y: 7.5, series: 'Sleep Hours'},\n        {x: 2, y: 8.2, series: 'Sleep Hours'},\n        {x: 3, y: 6.8, series: 'Sleep Hours'},\n        {x: 4, y: 7.9, series: 'Sleep Hours'},\n        {x: 5, y: 7.1, series: 'Sleep Hours'},\n        {x: 6, y: 8.5, series: 'Sleep Hours'},\n        {x: 7, y: 7.3, series: 'Sleep Hours'}\n    ],\n    airData: [\n        {x: 1, y: 65, series: 'Air Quality'},\n        {x: 2, y: 72, series: 'Air Quality'},\n        {x: 3, y: 58, series: 'Air Quality'},\n        {x: 4, y: 69, series: 'Air Quality'},\n        {x: 5, y: 63, series: 'Air Quality'},\n        {x: 6, y: 78, series: 'Air Quality'},\n        {x: 7, y: 67, series: 'Air Quality'}\n    ]\n};\n\nflow.set('sleepData', sleepData);\n\n// Send data to different outputs\nnode.send([\n    {topic: 'sleep-quality', payload: sleepData.sleepQuality},\n    {topic: 'env-quality', payload: sleepData.envQuality},\n    {topic: 'avg-duration', payload: sleepData.avgDuration},\n    {topic: 'avg-start', payload: sleepData.avgStart},\n    {topic: 'avg-end', payload: sleepData.avgEnd},\n    {topic: 'week-chart-sleep', payload: sleepData.weekData},\n    {topic: 'week-chart-air', payload: sleepData.airData}\n]);\n\nreturn null;",
-        "outputs": 7,
-        "noerr": 0,
-        "x": 350,
-        "y": 200,
+        "id": "53018ebdbe40bfe5",
+        "type": "GSheet",
+        "z": "login-flow",
+        "creds": "75f0767f084edb2d",
+        "method": "get",
+        "action": "",
+        "sheet": "1WDOMNNiOf1nsBzU2xE5ilt02XQw2OFqICUmibP-EJaA",
+        "cells": "auth!A:B",
+        "flatten": false,
+        "name": "",
+        "x": 310,
+        "y": 40,
         "wires": [
             [
-                "sleep-quality-gauge"
-            ],
-            [
-                "env-quality-gauge"
-            ],
-            [
-                "avg-duration-text"
-            ],
-            [
-                "avg-start-text"
-            ],
-            [
-                "avg-end-text"
-            ],
-            [
-                "week-chart"
-            ],
-            [
-                "week-chart"
+                "af22e085784a8977",
+                "7175702238f77a5f"
             ]
         ]
     },
     {
-        "id": "sleep-quality-gauge",
-        "type": "ui_gauge",
-        "z": "dashboard-flow",
-        "name": "Sleep Quality",
-        "group": "dashboard-group",
-        "order": 1,
-        "width": 6,
-        "height": 4,
-        "gtype": "gage",
-        "title": "Sleep Quality",
-        "label": "Average",
-        "format": "{{value}}",
-        "min": 0,
-        "max": 100,
-        "colors": [
-            "#ff4444",
-            "#ffaa00",
-            "#00bb00"
-        ],
-        "seg1": 30,
-        "seg2": 70,
-        "x": 600,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "env-quality-gauge",
-        "type": "ui_gauge",
-        "z": "dashboard-flow",
-        "name": "Environment Quality",
-        "group": "dashboard-group",
-        "order": 2,
-        "width": 6,
-        "height": 4,
-        "gtype": "gage",
-        "title": "Env Quality",
-        "label": "Average",
-        "format": "{{value}}",
-        "min": 0,
-        "max": 100,
-        "colors": [
-            "#ff4444",
-            "#ffaa00",
-            "#00bb00"
-        ],
-        "seg1": 30,
-        "seg2": 70,
-        "x": 600,
-        "y": 250,
-        "wires": []
-    },
-    {
-        "id": "avg-duration-text",
-        "type": "ui_text",
-        "z": "dashboard-flow",
-        "group": "stats-group",
-        "order": 1,
-        "width": 4,
-        "height": 1,
-        "name": "Average Duration",
-        "label": "Avg. Duration:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 600,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "avg-start-text",
-        "type": "ui_text",
-        "z": "dashboard-flow",
-        "group": "stats-group",
-        "order": 2,
-        "width": 4,
-        "height": 1,
-        "name": "Average Start",
-        "label": "Avg. Start:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 600,
-        "y": 350,
-        "wires": []
-    },
-    {
-        "id": "avg-end-text",
-        "type": "ui_text",
-        "z": "dashboard-flow",
-        "group": "stats-group",
-        "order": 3,
-        "width": 4,
-        "height": 1,
-        "name": "Average End",
-        "label": "Avg. End:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 600,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "week-chart",
-        "type": "ui_chart",
-        "z": "dashboard-flow",
-        "name": "Past Week Chart",
-        "group": "charts-group",
-        "order": 1,
-        "width": 12,
-        "height": 6,
-        "label": "Past Week - Sleep & Air Quality",
-        "chartType": "line",
-        "legend": "true",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "Loading data...",
-        "dot": false,
-        "ymin": "0",
-        "ymax": "100",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "86400",
-        "cutout": 0,
-        "useOneColor": false,
-        "colors": [
-            "#1f77b4",
-            "#ff7f0e",
-            "#2ca02c",
-            "#d62728",
-            "#9467bd"
-        ],
-        "outputs": 1,
-        "x": 600,
-        "y": 450,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "alarm-controls",
-        "type": "ui_form",
-        "z": "dashboard-flow",
-        "name": "Alarm Settings",
-        "label": "Alarm Settings",
-        "group": "controls-group",
-        "order": 1,
-        "width": 6,
-        "height": 4,
-        "options": [
-            {
-                "label": "Alarm Time",
-                "value": "alarmTime",
-                "type": "time",
-                "required": false
-            },
-            {
-                "label": "Sleep Start",
-                "value": "sleepStart",
-                "type": "time",
-                "required": false
-            },
-            {
-                "label": "Sleep End",
-                "value": "sleepEnd",
-                "type": "time",
-                "required": false
-            }
-        ],
-        "formValue": {
-            "alarmTime": "",
-            "sleepStart": "",
-            "sleepEnd": ""
-        },
-        "payload": "",
-        "submit": "Set",
-        "cancel": "",
-        "topic": "alarm-settings",
-        "x": 350,
-        "y": 500,
-        "wires": [
-            [
-                "alarm-handler"
-            ]
-        ]
-    },
-    {
-        "id": "alarm-handler",
-        "type": "function",
-        "z": "dashboard-flow",
-        "name": "Handle Alarm Settings",
-        "func": "flow.set('alarmSettings', msg.payload);\nmsg.payload = 'Settings saved successfully!';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 550,
-        "y": 500,
-        "wires": [
-            [
-                "alarm-status"
-            ]
-        ]
-    },
-    {
-        "id": "alarm-status",
-        "type": "ui_text",
-        "z": "dashboard-flow",
-        "group": "controls-group",
-        "order": 2,
-        "width": 6,
-        "height": 1,
-        "name": "Alarm Status",
-        "label": "Status:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 750,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "env-data-init",
+        "id": "1eedd04d08fcc9f0",
         "type": "inject",
-        "z": "environment-flow",
-        "name": "Initialize Environment Data",
+        "z": "login-flow",
+        "name": "",
         "props": [
             {
                 "p": "payload"
@@ -672,39 +397,48 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
-        "x": 180,
-        "y": 100,
+        "payloadType": "str",
+        "x": 90,
+        "y": 40,
         "wires": [
             [
-                "env-data-generator"
+                "53018ebdbe40bfe5"
             ]
         ]
     },
     {
-        "id": "env-data-generator",
+        "id": "af22e085784a8977",
         "type": "function",
-        "z": "environment-flow",
-        "name": "Generate Environment Data",
-        "func": "// Generate sample environmental data over 24 hours\nconst generateTimeSeriesData = (baseValue, variance, label) => {\n    const data = [];\n    const now = new Date();\n    \n    for (let i = 0; i < 24; i++) {\n        const timestamp = new Date(now.getTime() - (24 - i) * 60 * 60 * 1000);\n        const value = Math.max(0, baseValue + (Math.random() - 0.5) * variance);\n        data.push({\n            x: timestamp.getTime(),\n            y: Math.round(value * 10) / 10,\n            series: label\n        });\n    }\n    return data;\n};\n\nconst envData = {\n    temperature: generateTimeSeriesData(22, 8, 'Temperature'),     // 18-26°C range\n    humidity: generateTimeSeriesData(50, 30, 'Humidity'),        // 35-65% range\n    light: generateTimeSeriesData(40, 60, 'Light'),              // 10-70% range\n    overallQuality: generateTimeSeriesData(60, 40, 'Quality')    // 40-80 pts range\n};\n\nflow.set('envData', envData);\n\n// Send data to charts\nenvData.temperature.forEach(point => {\n    node.send([{topic: 'temperature', payload: point}, null, null, null]);\n});\n\nenvData.humidity.forEach(point => {\n    node.send([null, {topic: 'humidity', payload: point}, null, null]);\n});\n\nenvData.light.forEach(point => {\n    node.send([null, null, {topic: 'light', payload: point}, null]);\n});\n\nenvData.overallQuality.forEach(point => {\n    node.send([null, null, null, {topic: 'overall-quality', payload: point}]);\n});\n\nreturn null;",
-        "outputs": 4,
+        "z": "login-flow",
+        "name": "set auth",
+        "func": "global.set('auth', msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
         "noerr": 0,
-        "x": 400,
-        "y": 100,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 40,
         "wires": [
-            [
-                "temp-chart"
-            ],
-            [
-                "humidity-chart"
-            ],
-            [
-                "light-chart"
-            ],
-            [
-                "overall-quality-chart"
-            ]
+            []
         ]
+    },
+    {
+        "id": "7175702238f77a5f",
+        "type": "debug",
+        "z": "login-flow",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 100,
+        "wires": []
     },
     {
         "id": "temp-chart",
@@ -718,7 +452,7 @@
         "label": "Temperature (°C)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "HH:mm",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
@@ -726,14 +460,25 @@
         "ymax": "35",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "86400",
+        "removeOlderUnit": "60",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#ff6b6b"
+            "#ff6b6b",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 650,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 690,
         "y": 100,
         "wires": [
             []
@@ -751,7 +496,7 @@
         "label": "Humidity (%)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "HH:mm",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
@@ -759,15 +504,26 @@
         "ymax": "100",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "86400",
+        "removeOlderUnit": "60",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#4ecdc4"
+            "#4ecdc4",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 650,
-        "y": 150,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 700,
+        "y": 160,
         "wires": [
             []
         ]
@@ -784,7 +540,7 @@
         "label": "Light (%)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "HH:mm",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
@@ -792,15 +548,26 @@
         "ymax": "100",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "86400",
+        "removeOlderUnit": "60",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#ffe66d"
+            "#ffe66d",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 650,
-        "y": 200,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 690,
+        "y": 220,
         "wires": [
             []
         ]
@@ -817,7 +584,7 @@
         "label": "Overall Quality (pts)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "HH:mm",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
@@ -825,24 +592,88 @@
         "ymax": "100",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "86400",
+        "removeOlderUnit": "60",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#a8e6cf"
+            "#a8e6cf",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 650,
-        "y": 250,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 720,
+        "y": 280,
         "wires": [
             []
         ]
     },
     {
-        "id": "sleep-data-init",
+        "id": "539377916580c123",
+        "type": "mqtt in",
+        "z": "environment-flow",
+        "name": "",
+        "topic": "23127302/sense",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "07391ca88541455f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 200,
+        "wires": [
+            [
+                "2b274d557327cfb6",
+                "ef3a2a42af7e349f"
+            ]
+        ]
+    },
+    {
+        "id": "dfa7d43bac128aab",
+        "type": "function",
+        "z": "environment-flow",
+        "name": "splitter",
+        "func": "node.send([\n    {\n        payload:msg.payload.temp,\n        timestamp:msg.payload.timestamp,\n        topic:\"temp\",\n    }, \n    {\n        payload:msg.payload.humidity,\n        timestamp:msg.payload.timestamp,\n        topic:\"humidity\",\n    },\n    {\n        payload:msg.payload.lightlevel,\n        timestamp:msg.payload.timestamp,\n        topic:\"lightlevel\",\n    },\n    {\n        payload:Math.max(0, 100 - Math.abs(msg.payload.temp - 24) - Math.abs(msg.payload.humidity - 60) - msg.payload.lightlevel)/10 ,\n        timestamp:msg.payload.timestamp,\n        topic:\"overall\",\n    },\n    \n])\n\n\nreturn null;",
+        "outputs": 4,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 200,
+        "wires": [
+            [
+                "temp-chart"
+            ],
+            [
+                "humidity-chart"
+            ],
+            [
+                "light-chart"
+            ],
+            [
+                "overall-quality-chart",
+                "415aa5547f155409",
+                "60b0fe105507d764"
+            ]
+        ]
+    },
+    {
+        "id": "809ab8d91dd04bfd",
         "type": "inject",
-        "z": "sleep-flow",
-        "name": "Initialize Sleep Data",
+        "z": "environment-flow",
+        "name": "",
         "props": [
             {
                 "p": "payload"
@@ -854,29 +685,118 @@
         ],
         "repeat": "",
         "crontab": "",
-        "once": true,
+        "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "{\"temp\":65.2,\"humidity\":63.5,\"lightlevel\":63.5,\"timestamp\":1755264040}",
+        "payloadType": "json",
         "x": 170,
-        "y": 100,
+        "y": 300,
         "wires": [
             [
-                "sleep-data-generator"
+                "dfa7d43bac128aab"
             ]
         ]
+    },
+    {
+        "id": "415aa5547f155409",
+        "type": "function",
+        "z": "environment-flow",
+        "name": "function 2",
+        "func": "let buffer = flow.get(\"buffer\")\nif ( ! buffer ) {\n    buffer = [];\n}\n\nbuffer.push(msg.payload);\nlet envAvg = buffer.reduce((a, b) => a + b) / buffer.length;\nglobal.set(\"EnvAvg\", envAvg )\nflow.set(\"buffer\", buffer);\nreturn envAvg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "749a4c73a1387e12"
+            ]
+        ]
+    },
+    {
+        "id": "2b274d557327cfb6",
+        "type": "debug",
+        "z": "environment-flow",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "60b0fe105507d764",
+        "type": "debug",
+        "z": "environment-flow",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "ef3a2a42af7e349f",
+        "type": "function",
+        "z": "environment-flow",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "dfa7d43bac128aab"
+            ]
+        ]
+    },
+    {
+        "id": "749a4c73a1387e12",
+        "type": "link out",
+        "z": "environment-flow",
+        "name": "envAvg",
+        "mode": "link",
+        "links": [
+            "3258e9215e94e367"
+        ],
+        "x": 795,
+        "y": 360,
+        "wires": []
     },
     {
         "id": "sleep-data-generator",
         "type": "function",
         "z": "sleep-flow",
-        "name": "Generate Sleep Data",
-        "func": "// Generate sample sleep tracking data for the past 7 days\nconst generateSleepTimeSeriesData = (baseValue, variance, label) => {\n    const data = [];\n    const now = new Date();\n    \n    for (let i = 0; i < 7; i++) {\n        const timestamp = new Date(now.getTime() - (7 - i) * 24 * 60 * 60 * 1000);\n        const value = Math.max(0, baseValue + (Math.random() - 0.5) * variance);\n        data.push({\n            x: timestamp.getTime(),\n            y: Math.round(value * 10) / 10,\n            series: label\n        });\n    }\n    return data;\n};\n\nconst sleepTrackingData = {\n    sleepQuality: generateSleepTimeSeriesData(70, 40, 'Sleep Quality'),    // 50-90 pts range\n    startTime: generateSleepTimeSeriesData(22, 4, 'Start Time'),           // 20-24h range\n    endTime: generateSleepTimeSeriesData(7, 3, 'End Time'),                // 5-9h range\n    movement: generateSleepTimeSeriesData(30, 40, 'Movement')              // 10-50 movements\n};\n\nflow.set('sleepTrackingData', sleepTrackingData);\n\n// Send data to charts\nsleepTrackingData.sleepQuality.forEach(point => {\n    node.send([{topic: 'sleep-quality', payload: point}, null, null, null]);\n});\n\nsleepTrackingData.startTime.forEach(point => {\n    node.send([null, {topic: 'start-time', payload: point}, null, null]);\n});\n\nsleepTrackingData.endTime.forEach(point => {\n    node.send([null, null, {topic: 'end-time', payload: point}, null]);\n});\n\nsleepTrackingData.movement.forEach(point => {\n    node.send([null, null, null, {topic: 'movement', payload: point}]);\n});\n\nreturn null;",
+        "name": "split",
+        "func": "\n\nreturn null;",
         "outputs": 4,
+        "timeout": "",
         "noerr": 0,
-        "x": 390,
-        "y": 100,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 140,
         "wires": [
             [
                 "sleep-quality-chart"
@@ -1022,6 +942,792 @@
         "y": 250,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "9619c783e2a40352",
+        "type": "debug",
+        "z": "sleep-flow",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "81786e1a6ffa6ed2",
+        "type": "ui_button",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "group": "923fa8921ff9b099",
+        "order": 2,
+        "width": 10,
+        "height": 1,
+        "passthru": false,
+        "label": "alarm-toggle",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "topic": "toggle-time",
+        "topicType": "str",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "4c4f92a2bd23bf83"
+            ]
+        ]
+    },
+    {
+        "id": "4eb1e901339c96ed",
+        "type": "mqtt out",
+        "z": "4c5f97a5f0e24b71",
+        "name": "web-button-alarm-toggle",
+        "topic": "esp32-STC48613/alarm-toggle",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "07391ca88541455f",
+        "x": 890,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "e494f2c3eabf2566",
+        "type": "mqtt in",
+        "z": "4c5f97a5f0e24b71",
+        "name": "sleep-quality",
+        "topic": "ESP32-STC48613/sleep-quality",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "07391ca88541455f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 20,
+        "wires": [
+            [
+                "8b8f97311bdc9197",
+                "2698840de059b8a5"
+            ]
+        ]
+    },
+    {
+        "id": "d78be8eba57fa10f",
+        "type": "mqtt in",
+        "z": "4c5f97a5f0e24b71",
+        "name": "env-quality",
+        "topic": "ESP32-STC48613/env-quality",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "07391ca88541455f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 100,
+        "wires": [
+            [
+                "438bc3042b6d3aec",
+                "1400465acebb7efe"
+            ]
+        ]
+    },
+    {
+        "id": "c386d072d7ba57d6",
+        "type": "ui_chart",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "group": "923fa8921ff9b099",
+        "order": 12,
+        "width": 17,
+        "height": 9,
+        "label": "historyChart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "9",
+        "removeOlderPoints": "15",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 690,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ccda619479c0b739",
+        "type": "ui_gauge",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "group": "923fa8921ff9b099",
+        "order": 1,
+        "width": 20,
+        "height": 7,
+        "gtype": "gage",
+        "title": "sleep-quality-gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 690,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "947c4744d8311da6",
+        "type": "ui_gauge",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "group": "923fa8921ff9b099",
+        "order": 11,
+        "width": 13,
+        "height": 9,
+        "gtype": "gage",
+        "title": "env-quality-gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "73d02866264c5547",
+        "type": "ui_button",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "group": "923fa8921ff9b099",
+        "order": 6,
+        "width": 10,
+        "height": 1,
+        "passthru": false,
+        "label": "Set Alarm",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "topic": "time",
+        "topicType": "msg",
+        "x": 220,
+        "y": 280,
+        "wires": [
+            [
+                "aa651b8b417f0873"
+            ]
+        ]
+    },
+    {
+        "id": "48c5ed161b9fb210",
+        "type": "join",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 530,
+        "y": 320,
+        "wires": [
+            [
+                "2b071609943fe19c"
+            ]
+        ]
+    },
+    {
+        "id": "c63314bb34d9b358",
+        "type": "ui_numeric",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "label": "min",
+        "tooltip": "",
+        "group": "923fa8921ff9b099",
+        "order": 5,
+        "width": 5,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "alarm-input-min",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "59",
+        "step": 1,
+        "className": "",
+        "x": 230,
+        "y": 360,
+        "wires": [
+            [
+                "b319fb9bbedca6bb"
+            ]
+        ]
+    },
+    {
+        "id": "4dced5d249571365",
+        "type": "ui_numeric",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "label": "hour",
+        "tooltip": "",
+        "group": "923fa8921ff9b099",
+        "order": 4,
+        "width": 5,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "alarm-input-hour",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "23",
+        "step": 1,
+        "className": "",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "878bd7e0aa95eda4"
+            ]
+        ]
+    },
+    {
+        "id": "b66a63aa1aa086bb",
+        "type": "mqtt out",
+        "z": "4c5f97a5f0e24b71",
+        "name": "web-alarm-input",
+        "topic": "esp32-STC48613/alarm-input",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "07391ca88541455f",
+        "x": 900,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "54b8aa2afbd3711a",
+        "type": "ui_button",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "group": "923fa8921ff9b099",
+        "order": 10,
+        "width": 10,
+        "height": 1,
+        "passthru": false,
+        "label": "Add Sleep",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [
+                "71da7443399770ac"
+            ]
+        ]
+    },
+    {
+        "id": "672f1cb1f5067d8d",
+        "type": "join",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 530,
+        "y": 460,
+        "wires": [
+            [
+                "47c4f0cd61a182ad"
+            ]
+        ]
+    },
+    {
+        "id": "1a4a5ec56311ccdd",
+        "type": "ui_numeric",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "label": "min",
+        "tooltip": "",
+        "group": "923fa8921ff9b099",
+        "order": 9,
+        "width": 5,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "sleep-input-min",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "59",
+        "step": 1,
+        "className": "",
+        "x": 230,
+        "y": 500,
+        "wires": [
+            [
+                "d67d9b8ef87d2675"
+            ]
+        ]
+    },
+    {
+        "id": "d7ad36215472c5f2",
+        "type": "ui_numeric",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "label": "hour",
+        "tooltip": "",
+        "group": "923fa8921ff9b099",
+        "order": 8,
+        "width": 5,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "sleep-input-hour",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "23",
+        "step": 1,
+        "className": "",
+        "x": 230,
+        "y": 460,
+        "wires": [
+            [
+                "2f968b0a1dfe1c5d"
+            ]
+        ]
+    },
+    {
+        "id": "7fdcc03bfb161ce9",
+        "type": "mqtt out",
+        "z": "4c5f97a5f0e24b71",
+        "name": "web-sleep-input",
+        "topic": "esp32-STC48613/sleep-input",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "07391ca88541455f",
+        "x": 880,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "71da7443399770ac",
+        "type": "change",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "time",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 420,
+        "wires": [
+            [
+                "672f1cb1f5067d8d"
+            ]
+        ]
+    },
+    {
+        "id": "2f968b0a1dfe1c5d",
+        "type": "change",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "sleep-input-hour",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 460,
+        "wires": [
+            [
+                "672f1cb1f5067d8d"
+            ]
+        ]
+    },
+    {
+        "id": "d67d9b8ef87d2675",
+        "type": "change",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "sleep-input-min",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 500,
+        "wires": [
+            [
+                "672f1cb1f5067d8d"
+            ]
+        ]
+    },
+    {
+        "id": "aa651b8b417f0873",
+        "type": "change",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "time",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 280,
+        "wires": [
+            [
+                "48c5ed161b9fb210"
+            ]
+        ]
+    },
+    {
+        "id": "878bd7e0aa95eda4",
+        "type": "change",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "alarm-input-hour",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 320,
+        "wires": [
+            [
+                "48c5ed161b9fb210"
+            ]
+        ]
+    },
+    {
+        "id": "b319fb9bbedca6bb",
+        "type": "change",
+        "z": "4c5f97a5f0e24b71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "alarm-input-min",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "48c5ed161b9fb210"
+            ]
+        ]
+    },
+    {
+        "id": "4c4f92a2bd23bf83",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 220,
+        "wires": [
+            [
+                "4eb1e901339c96ed"
+            ]
+        ]
+    },
+    {
+        "id": "2b071609943fe19c",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 320,
+        "wires": [
+            [
+                "b66a63aa1aa086bb"
+            ]
+        ]
+    },
+    {
+        "id": "47c4f0cd61a182ad",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 460,
+        "wires": [
+            [
+                "7fdcc03bfb161ce9"
+            ]
+        ]
+    },
+    {
+        "id": "438bc3042b6d3aec",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "947c4744d8311da6"
+            ]
+        ]
+    },
+    {
+        "id": "8b8f97311bdc9197",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 20,
+        "wires": [
+            [
+                "ccda619479c0b739"
+            ]
+        ]
+    },
+    {
+        "id": "1400465acebb7efe",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 100,
+        "wires": [
+            [
+                "c386d072d7ba57d6"
+            ]
+        ]
+    },
+    {
+        "id": "2698840de059b8a5",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 60,
+        "wires": [
+            [
+                "c386d072d7ba57d6"
+            ]
+        ]
+    },
+    {
+        "id": "3258e9215e94e367",
+        "type": "link in",
+        "z": "4c5f97a5f0e24b71",
+        "name": "link in 1",
+        "links": [
+            "749a4c73a1387e12"
+        ],
+        "x": 255,
+        "y": 160,
+        "wires": [
+            [
+                "438bc3042b6d3aec"
+            ]
         ]
     }
 ]
