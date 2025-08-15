@@ -8,190 +8,555 @@
         "env": []
     },
     {
-        "id": "c5d346b3ac5a4b7f",
+        "id": "login-flow",
         "type": "tab",
-        "label": "Flow 2",
+        "label": "Authentication",
         "disabled": false,
-        "info": "",
-        "env": []
+        "info": ""
     },
     {
-        "id": "8a0d2cb00f2fd3ff",
+        "id": "dashboard-flow",
+        "type": "tab",
+        "label": "Main Dashboard",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "environment-flow",
+        "type": "tab",
+        "label": "Environment",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "sleep-flow",
+        "type": "tab",
+        "label": "Sleep Tracking",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "login-tab",
         "type": "ui_tab",
         "name": "Login",
         "icon": "dashboard",
+        "order": 1,
         "disabled": false,
         "hidden": false
     },
     {
-        "id": "b3d18ad0f9d054b6",
+        "id": "dashboard-tab",
         "type": "ui_tab",
         "name": "Dashboard",
         "icon": "dashboard",
+        "order": 2,
         "disabled": false,
         "hidden": false
     },
     {
-        "id": "d3bc4730c4d31cc0",
+        "id": "environment-tab",
         "type": "ui_tab",
         "name": "Environment",
-        "icon": "dashboard",
+        "icon": "fa-leaf",
+        "order": 3,
         "disabled": false,
         "hidden": false
     },
     {
-        "id": "19d02233bba54387",
+        "id": "sleep-tab",
         "type": "ui_tab",
         "name": "Sleep",
-        "icon": "dashboard",
+        "icon": "fa-bed",
+        "order": 4,
         "disabled": false,
         "hidden": false
     },
     {
-        "id": "c02e9c6f2b2c5ef0",
-        "type": "ui_group",
-        "name": "Login",
-        "tab": "8a0d2cb00f2fd3ff",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
+        "id": "ui_base",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Sleep Tracking Theme",
+                "default": "#4B1A52",
+                "baseColor": "#4B1A52",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#097479",
+                    "edited": false
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "Sleep Tracking Clock",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
     },
     {
-        "id": "8d68a765b7923bb3",
+        "id": "login-group",
         "type": "ui_group",
-        "name": "Dashboard",
-        "tab": "b3d18ad0f9d054b6",
+        "name": "Login",
+        "tab": "login-tab",
         "order": 1,
         "disp": true,
         "width": "12",
         "collapse": false
     },
     {
-        "id": "5c6a1f14f5f3d7aa",
-        "type": "ui_template",
-        "z": "c5d346b3ac5a4b7f",
-        "group": "c02e9c6f2b2c5ef0",
-        "name": "Login Form",
-        "order": 0,
-        "width": "6",
-        "height": "6",
-        "format": "<div style=\"text-align:center\">\n    <h3>Login</h3>\n    <p><input id=\"username\" type=\"text\" placeholder=\"Username\"></p>\n    <p><input id=\"password\" type=\"password\" placeholder=\"Password\"></p>\n    <p><button id=\"loginBtn\">Login</button></p>\n    <p id=\"msg\" style=\"color:red\"></p>\n</div>\n<script>\n(function(scope) {\n    document.getElementById('loginBtn').onclick = function(){\n        scope.send({payload:{username: document.getElementById('username').value, password: document.getElementById('password').value}});\n    }\n})(scope);\n</script>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "x": 330,
-        "y": 140,
-        "wires": [
-            [
-                "49bbdf3b03f5135d"
-            ]
-        ]
-    },
-    {
-        "id": "49bbdf3b03f5135d",
-        "type": "function",
-        "z": "c5d346b3ac5a4b7f",
-        "name": "Check Login",
-        "func": "if(msg.payload.username === \"admin\" && msg.payload.password === \"1234\"){\n    flow.set(\"loggedIn\",true);\n    msg.payload = {login:true};\n} else {\n    msg.payload = {login:false};\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 520,
-        "y": 140,
-        "wires": [
-            [
-                "0dff95d56c0cf9d0"
-            ]
-        ]
-    },
-    {
-        "id": "0dff95d56c0cf9d0",
-        "type": "ui_template",
-        "z": "c5d346b3ac5a4b7f",
-        "group": "c02e9c6f2b2c5ef0",
-        "name": "Login Result",
+        "id": "dashboard-group",
+        "type": "ui_group",
+        "name": "Sleep Quality Overview",
+        "tab": "dashboard-tab",
         "order": 1,
-        "width": "6",
-        "height": "1",
-        "format": "<div ng-if=\"msg.payload.login===false\">\n    <p style='color:red'>Invalid username or password</p>\n</div>\n<div ng-if=\"msg.payload.login===true\">\n    <script>\n        window.location.href = '/ui';\n    </script>\n</div>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "x": 710,
-        "y": 140,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "stats-group",
+        "type": "ui_group",
+        "name": "Sleep Statistics",
+        "tab": "dashboard-tab",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "charts-group",
+        "type": "ui_group",
+        "name": "Weekly Overview",
+        "tab": "dashboard-tab",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "controls-group",
+        "type": "ui_group",
+        "name": "Controls",
+        "tab": "dashboard-tab",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "env-charts-group",
+        "type": "ui_group",
+        "name": "Environment Data",
+        "tab": "environment-tab",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "sleep-charts-group",
+        "type": "ui_group",
+        "name": "Sleep Tracking Data",
+        "tab": "sleep-tab",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "login-form",
+        "type": "ui_form",
+        "z": "login-flow",
+        "name": "Login Form",
+        "label": "Sleep Tracking Clock - Login",
+        "group": "login-group",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Username",
+                "value": "username",
+                "type": "text",
+                "required": true
+            },
+            {
+                "label": "Password",
+                "value": "password",
+                "type": "password",
+                "required": true
+            }
+        ],
+        "formValue": {
+            "username": "",
+            "password": ""
+        },
+        "payload": "",
+        "submit": "Login",
+        "cancel": "",
+        "topic": "login",
+        "x": 150,
+        "y": 100,
         "wires": [
-            []
+            [
+                "auth-check"
+            ]
         ]
     },
     {
-        "id": "ccf582bf6dc82b9a",
+        "id": "auth-check",
+        "type": "function",
+        "z": "login-flow",
+        "name": "Authentication Check",
+        "func": "// Simple authentication (replace with real auth system)\nconst validUsers = {\n    'admin': 'password123',\n    'user': 'sleep2024',\n    'demo': 'demo'\n};\n\nif (validUsers[msg.payload.username] === msg.payload.password) {\n    // Set authentication flag\n    flow.set('authenticated', true);\n    flow.set('currentUser', msg.payload.username);\n    \n    msg.payload = {\n        success: true,\n        message: 'Login successful! Please navigate to Dashboard tab to continue.',\n        user: msg.payload.username\n    };\n    \n    // Trigger dashboard data initialization\n    node.send([msg, {topic: 'init-dashboard', payload: true}]);\n} else {\n    msg.payload = {\n        success: false,\n        message: 'Invalid username or password. Please try again.'\n    };\n    node.send([msg, null]);\n}\n\nreturn null;",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 350,
+        "y": 100,
+        "wires": [
+            [
+                "login-result"
+            ],
+            [
+                "dashboard-init-trigger"
+            ]
+        ]
+    },
+    {
+        "id": "login-result",
+        "type": "ui_text",
+        "z": "login-flow",
+        "group": "login-group",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Login Status",
+        "label": "Status:",
+        "format": "{{msg.payload.message}}",
+        "layout": "row-spread",
+        "x": 550,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "dashboard-init-trigger",
+        "type": "link out",
+        "z": "login-flow",
+        "name": "Dashboard Init Link",
+        "links": [
+            "dashboard-link-in"
+        ],
+        "x": 550,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "dashboard-link-in",
+        "type": "link in",
+        "z": "dashboard-flow",
+        "name": "Dashboard Link In",
+        "links": [
+            "dashboard-init-trigger"
+        ],
+        "x": 100,
+        "y": 50,
+        "wires": [
+            [
+                "dashboard-init"
+            ]
+        ]
+    },
+    {
+        "id": "manual-dashboard-init",
         "type": "inject",
-        "z": "c5d346b3ac5a4b7f",
-        "name": "Dummy Sleep Data",
+        "z": "dashboard-flow",
+        "name": "Manual Dashboard Load",
         "props": [
             {
                 "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
             }
         ],
-        "repeat": "5",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "",
-        "payload": "{\"sleepQuality\":47,\"envQuality\":46,\"avgDuration\":\"7h28m\",\"avgStart\":\"22h14m\",\"avgEnd\":\"5h42m\"}",
-        "payloadType": "json",
-        "x": 330,
-        "y": 280,
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "manual-init",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 180,
+        "y": 100,
         "wires": [
             [
-                "44c59c5fd7ee4d1e"
+                "auth-guard"
             ]
         ]
     },
     {
-        "id": "44c59c5fd7ee4d1e",
+        "id": "auth-guard",
         "type": "function",
-        "z": "c5d346b3ac5a4b7f",
-        "name": "Format for UI",
-        "func": "msg.payload = [\n    {topic:\"Sleep Quality\", payload: msg.payload.sleepQuality},\n    {topic:\"Env Quality\", payload: msg.payload.envQuality},\n    {topic:\"Avg Duration\", payload: msg.payload.avgDuration},\n    {topic:\"Avg Start\", payload: msg.payload.avgStart},\n    {topic:\"Avg End\", payload: msg.payload.avgEnd}\n];\nreturn [msg.payload.map(v => {return {topic:v.topic, payload:v.payload};})];",
-        "outputs": 1,
+        "z": "dashboard-flow",
+        "name": "Authentication Guard",
+        "func": "if (!flow.get('authenticated')) {\n    msg.payload = 'Please login first on the Login tab';\n    return [null, msg];\n}\nreturn [msg, null];",
+        "outputs": 2,
         "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 530,
-        "y": 280,
+        "x": 350,
+        "y": 100,
         "wires": [
             [
-                "edc0f0a8a2b05f9b"
+                "dashboard-init"
+            ],
+            [
+                "login-redirect"
             ]
         ]
     },
     {
-        "id": "edc0f0a8a2b05f9b",
-        "type": "ui_chart",
-        "z": "c5d346b3ac5a4b7f",
-        "name": "Past Week Chart",
-        "group": "8d68a765b7923bb3",
+        "id": "login-redirect",
+        "type": "ui_text",
+        "z": "dashboard-flow",
+        "group": "dashboard-group",
         "order": 0,
-        "width": "12",
-        "height": "6",
-        "label": "Past Week",
+        "width": 12,
+        "height": 1,
+        "name": "Auth Required Message",
+        "label": "Authentication Required:",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "x": 570,
+        "y": 130,
+        "wires": []
+    },
+    {
+        "id": "dashboard-init",
+        "type": "function",
+        "z": "dashboard-flow",
+        "name": "Initialize Dashboard",
+        "func": "// Generate sample sleep data\nconst sleepData = {\n    avgDuration: '7h28m',\n    avgStart: '22h14m',\n    avgEnd: '5h42m',\n    sleepQuality: 47,\n    envQuality: 46,\n    weekData: [\n        {x: 1, y: 7.5, series: 'Sleep Hours'},\n        {x: 2, y: 8.2, series: 'Sleep Hours'},\n        {x: 3, y: 6.8, series: 'Sleep Hours'},\n        {x: 4, y: 7.9, series: 'Sleep Hours'},\n        {x: 5, y: 7.1, series: 'Sleep Hours'},\n        {x: 6, y: 8.5, series: 'Sleep Hours'},\n        {x: 7, y: 7.3, series: 'Sleep Hours'}\n    ],\n    airData: [\n        {x: 1, y: 65, series: 'Air Quality'},\n        {x: 2, y: 72, series: 'Air Quality'},\n        {x: 3, y: 58, series: 'Air Quality'},\n        {x: 4, y: 69, series: 'Air Quality'},\n        {x: 5, y: 63, series: 'Air Quality'},\n        {x: 6, y: 78, series: 'Air Quality'},\n        {x: 7, y: 67, series: 'Air Quality'}\n    ]\n};\n\nflow.set('sleepData', sleepData);\n\n// Send data to different outputs\nnode.send([\n    {topic: 'sleep-quality', payload: sleepData.sleepQuality},\n    {topic: 'env-quality', payload: sleepData.envQuality},\n    {topic: 'avg-duration', payload: sleepData.avgDuration},\n    {topic: 'avg-start', payload: sleepData.avgStart},\n    {topic: 'avg-end', payload: sleepData.avgEnd},\n    {topic: 'week-chart-sleep', payload: sleepData.weekData},\n    {topic: 'week-chart-air', payload: sleepData.airData}\n]);\n\nreturn null;",
+        "outputs": 7,
+        "noerr": 0,
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "sleep-quality-gauge"
+            ],
+            [
+                "env-quality-gauge"
+            ],
+            [
+                "avg-duration-text"
+            ],
+            [
+                "avg-start-text"
+            ],
+            [
+                "avg-end-text"
+            ],
+            [
+                "week-chart"
+            ],
+            [
+                "week-chart"
+            ]
+        ]
+    },
+    {
+        "id": "sleep-quality-gauge",
+        "type": "ui_gauge",
+        "z": "dashboard-flow",
+        "name": "Sleep Quality",
+        "group": "dashboard-group",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Sleep Quality",
+        "label": "Average",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#ff4444",
+            "#ffaa00",
+            "#00bb00"
+        ],
+        "seg1": 30,
+        "seg2": 70,
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "env-quality-gauge",
+        "type": "ui_gauge",
+        "z": "dashboard-flow",
+        "name": "Environment Quality",
+        "group": "dashboard-group",
+        "order": 2,
+        "width": 6,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Env Quality",
+        "label": "Average",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#ff4444",
+            "#ffaa00",
+            "#00bb00"
+        ],
+        "seg1": 30,
+        "seg2": 70,
+        "x": 600,
+        "y": 250,
+        "wires": []
+    },
+    {
+        "id": "avg-duration-text",
+        "type": "ui_text",
+        "z": "dashboard-flow",
+        "group": "stats-group",
+        "order": 1,
+        "width": 4,
+        "height": 1,
+        "name": "Average Duration",
+        "label": "Avg. Duration:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "avg-start-text",
+        "type": "ui_text",
+        "z": "dashboard-flow",
+        "group": "stats-group",
+        "order": 2,
+        "width": 4,
+        "height": 1,
+        "name": "Average Start",
+        "label": "Avg. Start:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 350,
+        "wires": []
+    },
+    {
+        "id": "avg-end-text",
+        "type": "ui_text",
+        "z": "dashboard-flow",
+        "group": "stats-group",
+        "order": 3,
+        "width": 4,
+        "height": 1,
+        "name": "Average End",
+        "label": "Avg. End:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "week-chart",
+        "type": "ui_chart",
+        "z": "dashboard-flow",
+        "name": "Past Week Chart",
+        "group": "charts-group",
+        "order": 1,
+        "width": 12,
+        "height": 6,
+        "label": "Past Week - Sleep & Air Quality",
         "chartType": "line",
         "legend": "true",
-        "xformat": "auto",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
-        "nodata": "Waiting for data...",
+        "nodata": "Loading data...",
         "dot": false,
         "ymin": "0",
         "ymax": "100",
         "removeOlder": 1,
-        "removeOlderPoints": "20",
-        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
         "cutout": 0,
         "useOneColor": false,
         "colors": [
@@ -199,16 +564,462 @@
             "#ff7f0e",
             "#2ca02c",
             "#d62728",
-            "#9467bd",
-            "#8c564b",
-            "#e377c2",
-            "#7f7f7f",
-            "#bcbd22",
-            "#17becf"
+            "#9467bd"
         ],
         "outputs": 1,
+        "x": 600,
+        "y": 450,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "alarm-controls",
+        "type": "ui_form",
+        "z": "dashboard-flow",
+        "name": "Alarm Settings",
+        "label": "Alarm Settings",
+        "group": "controls-group",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "options": [
+            {
+                "label": "Alarm Time",
+                "value": "alarmTime",
+                "type": "time",
+                "required": false
+            },
+            {
+                "label": "Sleep Start",
+                "value": "sleepStart",
+                "type": "time",
+                "required": false
+            },
+            {
+                "label": "Sleep End",
+                "value": "sleepEnd",
+                "type": "time",
+                "required": false
+            }
+        ],
+        "formValue": {
+            "alarmTime": "",
+            "sleepStart": "",
+            "sleepEnd": ""
+        },
+        "payload": "",
+        "submit": "Set",
+        "cancel": "",
+        "topic": "alarm-settings",
+        "x": 350,
+        "y": 500,
+        "wires": [
+            [
+                "alarm-handler"
+            ]
+        ]
+    },
+    {
+        "id": "alarm-handler",
+        "type": "function",
+        "z": "dashboard-flow",
+        "name": "Handle Alarm Settings",
+        "func": "flow.set('alarmSettings', msg.payload);\nmsg.payload = 'Settings saved successfully!';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 500,
+        "wires": [
+            [
+                "alarm-status"
+            ]
+        ]
+    },
+    {
+        "id": "alarm-status",
+        "type": "ui_text",
+        "z": "dashboard-flow",
+        "group": "controls-group",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "name": "Alarm Status",
+        "label": "Status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
         "x": 750,
-        "y": 280,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "env-data-init",
+        "type": "inject",
+        "z": "environment-flow",
+        "name": "Initialize Environment Data",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "env-data-generator"
+            ]
+        ]
+    },
+    {
+        "id": "env-data-generator",
+        "type": "function",
+        "z": "environment-flow",
+        "name": "Generate Environment Data",
+        "func": "// Generate sample environmental data over 24 hours\nconst generateTimeSeriesData = (baseValue, variance, label) => {\n    const data = [];\n    const now = new Date();\n    \n    for (let i = 0; i < 24; i++) {\n        const timestamp = new Date(now.getTime() - (24 - i) * 60 * 60 * 1000);\n        const value = Math.max(0, baseValue + (Math.random() - 0.5) * variance);\n        data.push({\n            x: timestamp.getTime(),\n            y: Math.round(value * 10) / 10,\n            series: label\n        });\n    }\n    return data;\n};\n\nconst envData = {\n    temperature: generateTimeSeriesData(22, 8, 'Temperature'),     // 18-26°C range\n    humidity: generateTimeSeriesData(50, 30, 'Humidity'),        // 35-65% range\n    light: generateTimeSeriesData(40, 60, 'Light'),              // 10-70% range\n    overallQuality: generateTimeSeriesData(60, 40, 'Quality')    // 40-80 pts range\n};\n\nflow.set('envData', envData);\n\n// Send data to charts\nenvData.temperature.forEach(point => {\n    node.send([{topic: 'temperature', payload: point}, null, null, null]);\n});\n\nenvData.humidity.forEach(point => {\n    node.send([null, {topic: 'humidity', payload: point}, null, null]);\n});\n\nenvData.light.forEach(point => {\n    node.send([null, null, {topic: 'light', payload: point}, null]);\n});\n\nenvData.overallQuality.forEach(point => {\n    node.send([null, null, null, {topic: 'overall-quality', payload: point}]);\n});\n\nreturn null;",
+        "outputs": 4,
+        "noerr": 0,
+        "x": 400,
+        "y": 100,
+        "wires": [
+            [
+                "temp-chart"
+            ],
+            [
+                "humidity-chart"
+            ],
+            [
+                "light-chart"
+            ],
+            [
+                "overall-quality-chart"
+            ]
+        ]
+    },
+    {
+        "id": "temp-chart",
+        "type": "ui_chart",
+        "z": "environment-flow",
+        "name": "Temperature Chart",
+        "group": "env-charts-group",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "Temperature (°C)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "10",
+        "ymax": "35",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#ff6b6b"
+        ],
+        "outputs": 1,
+        "x": 650,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "humidity-chart",
+        "type": "ui_chart",
+        "z": "environment-flow",
+        "name": "Humidity Chart",
+        "group": "env-charts-group",
+        "order": 2,
+        "width": 6,
+        "height": 4,
+        "label": "Humidity (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#4ecdc4"
+        ],
+        "outputs": 1,
+        "x": 650,
+        "y": 150,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "light-chart",
+        "type": "ui_chart",
+        "z": "environment-flow",
+        "name": "Light Chart",
+        "group": "env-charts-group",
+        "order": 3,
+        "width": 6,
+        "height": 4,
+        "label": "Light (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#ffe66d"
+        ],
+        "outputs": 1,
+        "x": 650,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "overall-quality-chart",
+        "type": "ui_chart",
+        "z": "environment-flow",
+        "name": "Overall Quality Chart",
+        "group": "env-charts-group",
+        "order": 4,
+        "width": 6,
+        "height": 4,
+        "label": "Overall Quality (pts)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#a8e6cf"
+        ],
+        "outputs": 1,
+        "x": 650,
+        "y": 250,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "sleep-data-init",
+        "type": "inject",
+        "z": "sleep-flow",
+        "name": "Initialize Sleep Data",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "sleep-data-generator"
+            ]
+        ]
+    },
+    {
+        "id": "sleep-data-generator",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "Generate Sleep Data",
+        "func": "// Generate sample sleep tracking data for the past 7 days\nconst generateSleepTimeSeriesData = (baseValue, variance, label) => {\n    const data = [];\n    const now = new Date();\n    \n    for (let i = 0; i < 7; i++) {\n        const timestamp = new Date(now.getTime() - (7 - i) * 24 * 60 * 60 * 1000);\n        const value = Math.max(0, baseValue + (Math.random() - 0.5) * variance);\n        data.push({\n            x: timestamp.getTime(),\n            y: Math.round(value * 10) / 10,\n            series: label\n        });\n    }\n    return data;\n};\n\nconst sleepTrackingData = {\n    sleepQuality: generateSleepTimeSeriesData(70, 40, 'Sleep Quality'),    // 50-90 pts range\n    startTime: generateSleepTimeSeriesData(22, 4, 'Start Time'),           // 20-24h range\n    endTime: generateSleepTimeSeriesData(7, 3, 'End Time'),                // 5-9h range\n    movement: generateSleepTimeSeriesData(30, 40, 'Movement')              // 10-50 movements\n};\n\nflow.set('sleepTrackingData', sleepTrackingData);\n\n// Send data to charts\nsleepTrackingData.sleepQuality.forEach(point => {\n    node.send([{topic: 'sleep-quality', payload: point}, null, null, null]);\n});\n\nsleepTrackingData.startTime.forEach(point => {\n    node.send([null, {topic: 'start-time', payload: point}, null, null]);\n});\n\nsleepTrackingData.endTime.forEach(point => {\n    node.send([null, null, {topic: 'end-time', payload: point}, null]);\n});\n\nsleepTrackingData.movement.forEach(point => {\n    node.send([null, null, null, {topic: 'movement', payload: point}]);\n});\n\nreturn null;",
+        "outputs": 4,
+        "noerr": 0,
+        "x": 390,
+        "y": 100,
+        "wires": [
+            [
+                "sleep-quality-chart"
+            ],
+            [
+                "start-time-chart"
+            ],
+            [
+                "end-time-chart"
+            ],
+            [
+                "movement-chart"
+            ]
+        ]
+    },
+    {
+        "id": "sleep-quality-chart",
+        "type": "ui_chart",
+        "z": "sleep-flow",
+        "name": "Sleep Quality Chart",
+        "group": "sleep-charts-group",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "Overall Quality (pts)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd/mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#667eea"
+        ],
+        "outputs": 1,
+        "x": 640,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "start-time-chart",
+        "type": "ui_chart",
+        "z": "sleep-flow",
+        "name": "Starting Time Chart",
+        "group": "sleep-charts-group",
+        "order": 2,
+        "width": 6,
+        "height": 4,
+        "label": "Starting Time (h)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd/mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "18",
+        "ymax": "24",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#764ba2"
+        ],
+        "outputs": 1,
+        "x": 640,
+        "y": 150,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "end-time-chart",
+        "type": "ui_chart",
+        "z": "sleep-flow",
+        "name": "Ending Time Chart",
+        "group": "sleep-charts-group",
+        "order": 3,
+        "width": 6,
+        "height": 4,
+        "label": "Ending Time (h)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd/mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "4",
+        "ymax": "10",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#f093fb"
+        ],
+        "outputs": 1,
+        "x": 640,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "movement-chart",
+        "type": "ui_chart",
+        "z": "sleep-flow",
+        "name": "Movement Chart",
+        "group": "sleep-charts-group",
+        "order": 4,
+        "width": 6,
+        "height": 4,
+        "label": "Movement During Sleep (pts)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd/mm",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#ff9a9e"
+        ],
+        "outputs": 1,
+        "x": 640,
+        "y": 250,
         "wires": [
             []
         ]
