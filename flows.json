@@ -321,7 +321,7 @@
         "z": "login-flow",
         "name": "Authentication Check",
         "func": "// default is admin admin\nconst validUsers = global.get('auth')\n.reduce((prev, cur) => \n{prev[cur[0]]=cur[1]; return prev}, {});\n\nif (validUsers[msg.payload.username] === msg.payload.password) {\n    global.set('authenticated', true);\n    global.set('currentUser', msg.payload.username);\n    \n    msg.payload = {\n        message: 'Login successful! Please navigate to Dashboard tab to continue.',\n        user: msg.payload.username\n    };\n    \n   return msg;\n} else {\n    msg.payload = {\n        message: 'Invalid username or password. Please try again.'\n    };\n    return msg;\n}\n\nreturn null;",
-        "outputs": 2,
+        "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
@@ -332,8 +332,7 @@
         "wires": [
             [
                 "login-result"
-            ],
-            []
+            ]
         ]
     },
     {
@@ -354,7 +353,7 @@
         "fontSize": "",
         "color": "#000000",
         "x": 670,
-        "y": 160,
+        "y": 140,
         "wires": []
     },
     {
@@ -372,8 +371,7 @@
         "y": 40,
         "wires": [
             [
-                "af22e085784a8977",
-                "da98d42baf9e6ef7"
+                "af22e085784a8977"
             ]
         ]
     },
@@ -418,7 +416,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
+        "x": 540,
         "y": 40,
         "wires": [
             []
@@ -465,8 +463,7 @@
         "y": 240,
         "wires": [
             [
-                "95dee798fab15e56",
-                "b5f4205926104752"
+                "95dee798fab15e56"
             ]
         ]
     },
@@ -481,38 +478,19 @@
         "cells": "auth!A:B",
         "flatten": false,
         "name": "",
-        "x": 550,
+        "x": 590,
         "y": 240,
         "wires": [
-            [
-                "67ab3d535d02c7c1"
-            ]
+            []
         ]
-    },
-    {
-        "id": "67ab3d535d02c7c1",
-        "type": "debug",
-        "z": "login-flow",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 780,
-        "y": 240,
-        "wires": []
     },
     {
         "id": "95dee798fab15e56",
         "type": "function",
         "z": "login-flow",
         "name": "preprocess",
-        "func": "\nreturn {\n    payload: [[msg.payload.username, msg.payload.password]]\n}",
-        "outputs": 1,
+        "func": "const users = global.get('auth').map(ent => ent[0])\nif (users.includes(msg.payload.username)) {\nreturn [ null ,\n{\n    payload:{\n        message:'Username already exists'\n    }\n}\n]\n\n}\nreturn [{\n    payload:[msg.payload.username, msg.payload.password],\n},\n    {\n        payload: {\n            message: 'Success fully added user, proceed with login form above.'\n        }\n    }\n]",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -523,39 +501,31 @@
         "wires": [
             [
                 "8e15fefd68814e53"
+            ],
+            [
+                "9a72ea69d87fdde7"
             ]
         ]
     },
     {
-        "id": "b5f4205926104752",
-        "type": "debug",
+        "id": "9a72ea69d87fdde7",
+        "type": "ui_text",
         "z": "login-flow",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 320,
+        "group": "login-group",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Sign in status",
+        "label": "Status:",
+        "format": "{{msg.payload.message}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 600,
         "y": 300,
-        "wires": []
-    },
-    {
-        "id": "da98d42baf9e6ef7",
-        "type": "debug",
-        "z": "login-flow",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 500,
-        "y": 100,
         "wires": []
     },
     {
