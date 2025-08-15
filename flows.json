@@ -327,7 +327,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
+        "x": 400,
         "y": 160,
         "wires": [
             [
@@ -353,7 +353,7 @@
         "font": "",
         "fontSize": "",
         "color": "#000000",
-        "x": 570,
+        "x": 670,
         "y": 160,
         "wires": []
     },
@@ -373,7 +373,7 @@
         "wires": [
             [
                 "af22e085784a8977",
-                "7175702238f77a5f"
+                "da98d42baf9e6ef7"
             ]
         ]
     },
@@ -425,7 +425,109 @@
         ]
     },
     {
-        "id": "7175702238f77a5f",
+        "id": "8c5d8ff8980647c3",
+        "type": "ui_form",
+        "z": "login-flow",
+        "name": "Sign up Form",
+        "label": "Sleep Tracking Clock - Register",
+        "group": "login-group",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Username",
+                "value": "username",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "username": "",
+            "password": ""
+        },
+        "payload": "",
+        "submit": "Sign up",
+        "cancel": "",
+        "topic": "login",
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "95dee798fab15e56",
+                "b5f4205926104752"
+            ]
+        ]
+    },
+    {
+        "id": "8e15fefd68814e53",
+        "type": "GSheet",
+        "z": "login-flow",
+        "creds": "75f0767f084edb2d",
+        "method": "append",
+        "action": "",
+        "sheet": "1WDOMNNiOf1nsBzU2xE5ilt02XQw2OFqICUmibP-EJaA",
+        "cells": "auth!A:B",
+        "flatten": false,
+        "name": "",
+        "x": 550,
+        "y": 240,
+        "wires": [
+            [
+                "67ab3d535d02c7c1"
+            ]
+        ]
+    },
+    {
+        "id": "67ab3d535d02c7c1",
+        "type": "debug",
+        "z": "login-flow",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "95dee798fab15e56",
+        "type": "function",
+        "z": "login-flow",
+        "name": "preprocess",
+        "func": "\nreturn {\n    payload: [[msg.payload.username, msg.payload.password]]\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 240,
+        "wires": [
+            [
+                "8e15fefd68814e53"
+            ]
+        ]
+    },
+    {
+        "id": "b5f4205926104752",
         "type": "debug",
         "z": "login-flow",
         "name": "debug 1",
@@ -436,7 +538,23 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
+        "x": 320,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "da98d42baf9e6ef7",
+        "type": "debug",
+        "z": "login-flow",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
         "y": 100,
         "wires": []
     },
