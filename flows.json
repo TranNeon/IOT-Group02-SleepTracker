@@ -280,6 +280,95 @@
         "name": "iot-sleeptracker@iot-sleeptracker-auth.iam.gserviceaccount.com"
     },
     {
+        "id": "c9ba07264dcdb2d4",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "09fdae3a384fe316",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "5d50083648cbcba6",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "c9ba07264dcdb2d4",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "09fdae3a384fe316",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "096cf77441ce34c4",
+        "type": "ui-group",
+        "name": "Group 1",
+        "page": "5d50083648cbcba6",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default"
+    },
+    {
         "id": "login-form",
         "type": "ui_form",
         "z": "login-flow",
@@ -751,50 +840,6 @@
         "wires": []
     },
     {
-        "id": "temp-chart",
-        "type": "ui_chart",
-        "z": "environment-flow",
-        "name": "Temperature Chart",
-        "group": "env-charts-group",
-        "order": 1,
-        "width": 6,
-        "height": 4,
-        "label": "Temperature (°C)",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "No data",
-        "dot": false,
-        "ymin": "10",
-        "ymax": "35",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "60",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#ff6b6b",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000",
-            "#000000"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 690,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "humidity-chart",
         "type": "ui_chart",
         "z": "environment-flow",
@@ -814,7 +859,7 @@
         "ymax": "100",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "60",
+        "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
         "useUTC": false,
@@ -832,7 +877,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 700,
+        "x": 900,
         "y": 160,
         "wires": [
             []
@@ -858,7 +903,7 @@
         "ymax": "100",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "60",
+        "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
         "useUTC": false,
@@ -876,7 +921,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 690,
+        "x": 890,
         "y": 220,
         "wires": [
             []
@@ -902,7 +947,7 @@
         "ymax": "100",
         "removeOlder": 1,
         "removeOlderPoints": "",
-        "removeOlderUnit": "60",
+        "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
         "useUTC": false,
@@ -920,7 +965,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 720,
+        "x": 920,
         "y": 280,
         "wires": [
             []
@@ -953,7 +998,7 @@
         "type": "function",
         "z": "environment-flow",
         "name": "splitter",
-        "func": "node.send([\n    {\n        payload:msg.payload.temp,\n        timestamp:msg.payload.timestamp,\n        topic:\"temp\",\n    }, \n    {\n        payload:msg.payload.humidity,\n        timestamp:msg.payload.timestamp,\n        topic:\"humidity\",\n    },\n    {\n        payload:msg.payload.lightlevel,\n        timestamp:msg.payload.timestamp,\n        topic:\"lightlevel\",\n    },\n    {\n        payload:Math.max(0, 100 - Math.abs(msg.payload.temp - 24) - Math.abs(msg.payload.humidity - 60) - msg.payload.lightlevel)/10 ,\n        timestamp:msg.payload.timestamp,\n        topic:\"overall\",\n    },\n    \n])\n\n\nreturn null;",
+        "func": "msg.payload.timestamp = msg.payload.timestamp * 1000 - 25200000;\nnode.send([\n    {\n        payload:msg.payload.temp,\n        timestamp:msg.payload.timestamp,\n        topic:\"temp\",\n    }, \n    {\n        payload:msg.payload.humidity,\n        timestamp:msg.payload.timestamp,\n        topic:\"humidity\",\n    },\n    {\n        payload:msg.payload.lightlevel,\n        timestamp:msg.payload.timestamp,\n        topic:\"lightlevel\",\n    },\n    {\n        payload:Math.max(0, 100 - Math.abs(msg.payload.temp - 24) - Math.abs(msg.payload.humidity - 60) - msg.payload.lightlevel)/10 ,\n        timestamp:msg.payload.timestamp,\n        topic:\"overall\",\n    },\n    \n])\n\n\nreturn null;",
         "outputs": 4,
         "timeout": 0,
         "noerr": 0,
@@ -1012,7 +1057,7 @@
         "type": "function",
         "z": "environment-flow",
         "name": "buffering and calculate average",
-        "func": "let buffer = flow.get(\"buffer\")\nif ( ! buffer ) {\n    buffer = [];\n}\n\nbuffer.push(msg.payload);\nlet envAvg = buffer.reduce((a, b) => a + b) / buffer.length;\nglobal.set(\"EnvAvg\", envAvg )\nflow.set(\"buffer\", buffer);\nreturn {payload:envAvg};",
+        "func": "let buffer = flow.get(\"buffer\")\nif ( ! buffer ) {\n    buffer = [];\n}\n\nbuffer.push(msg.payload);\nlet envAvg = buffer.reduce((a, b) => a + b) / buffer.length;\nglobal.set(\"EnvAvg\", envAvg )\nflow.set(\"buffer\", buffer);\nreturn {payload:envAvg.toFixed(2)};",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1221,7 +1266,7 @@
         "type": "function",
         "z": "environment-flow",
         "name": "get history",
-        "func": "let history = global.get('history')\nlet userHistory = history[global.get('currentUser')];\nfor (let packet of Object.values(userHistory))\n    node.send({payload:packet});\nreturn null;",
+        "func": "let history = global.get('history')\nlet userHistory = history[global.get('currentUser')];\nlet wait = 0;\nfor (let packet of Object.values(userHistory)){\n    setTimeout( () => node.send({ payload: packet }), wait * 500);\n    wait = wait + 1;\n}\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1298,6 +1343,82 @@
             [
                 "f7b3d0e626490c42"
             ]
+        ]
+    },
+    {
+        "id": "a8c43c3b2262c574",
+        "type": "inject",
+        "z": "environment-flow",
+        "name": "clear chart",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "humidity-chart",
+                "light-chart",
+                "overall-quality-chart",
+                "temp-chart"
+            ]
+        ]
+    },
+    {
+        "id": "temp-chart",
+        "type": "ui_chart",
+        "z": "environment-flow",
+        "name": "Temperature Chart",
+        "group": "env-charts-group",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "Temperature (°C)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "10",
+        "ymax": "35",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff6b6b",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 910,
+        "y": 100,
+        "wires": [
+            []
         ]
     },
     {
