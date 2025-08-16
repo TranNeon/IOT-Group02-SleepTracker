@@ -135,8 +135,11 @@
                     "edited": false
                 },
                 "widget-borderColor": {
-                    "value": "#097479",
+                    "value": "#333333",
                     "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
                 }
             },
             "angularTheme": {
@@ -277,7 +280,7 @@
         "name": "Login Form",
         "label": "Sleep Tracking Clock - Login",
         "group": "login-group",
-        "order": 1,
+        "order": 2,
         "width": 0,
         "height": 0,
         "options": [
@@ -308,7 +311,7 @@
         "splitLayout": false,
         "className": "",
         "x": 110,
-        "y": 160,
+        "y": 260,
         "wires": [
             [
                 "auth-check"
@@ -327,8 +330,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 160,
+        "x": 360,
+        "y": 260,
         "wires": [
             [
                 "login-result"
@@ -340,7 +343,7 @@
         "type": "ui_text",
         "z": "login-flow",
         "group": "login-group",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "name": "Login Status",
@@ -352,8 +355,8 @@
         "font": "",
         "fontSize": "",
         "color": "#000000",
-        "x": 670,
-        "y": 140,
+        "x": 630,
+        "y": 260,
         "wires": []
     },
     {
@@ -367,7 +370,7 @@
         "cells": "auth!A:B",
         "flatten": false,
         "name": "",
-        "x": 310,
+        "x": 450,
         "y": 40,
         "wires": [
             [
@@ -379,7 +382,7 @@
         "id": "1eedd04d08fcc9f0",
         "type": "inject",
         "z": "login-flow",
-        "name": "",
+        "name": "init",
         "props": [
             {
                 "p": "payload"
@@ -400,7 +403,8 @@
         "y": 40,
         "wires": [
             [
-                "53018ebdbe40bfe5"
+                "53018ebdbe40bfe5",
+                "9764798f920afd99"
             ]
         ]
     },
@@ -416,7 +420,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 540,
+        "x": 640,
         "y": 40,
         "wires": [
             []
@@ -429,7 +433,7 @@
         "name": "Sign up Form",
         "label": "Sleep Tracking Clock - Register",
         "group": "login-group",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "options": [
@@ -460,7 +464,7 @@
         "splitLayout": false,
         "className": "",
         "x": 120,
-        "y": 240,
+        "y": 340,
         "wires": [
             [
                 "95dee798fab15e56"
@@ -478,8 +482,8 @@
         "cells": "auth!A:B",
         "flatten": false,
         "name": "",
-        "x": 590,
-        "y": 240,
+        "x": 650,
+        "y": 340,
         "wires": [
             []
         ]
@@ -496,8 +500,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 240,
+        "x": 350,
+        "y": 340,
         "wires": [
             [
                 "8e15fefd68814e53"
@@ -512,7 +516,7 @@
         "type": "ui_text",
         "z": "login-flow",
         "group": "login-group",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "name": "Sign in status",
@@ -524,9 +528,205 @@
         "font": "",
         "fontSize": "",
         "color": "#000000",
-        "x": 600,
-        "y": 300,
+        "x": 640,
+        "y": 400,
         "wires": []
+    },
+    {
+        "id": "9b872422c56eb34f",
+        "type": "ui_form",
+        "z": "login-flow",
+        "name": "Change Password",
+        "label": "Change Password( login first) ",
+        "group": "login-group",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "password": ""
+        },
+        "payload": "",
+        "submit": "Change Password",
+        "cancel": "",
+        "topic": "login",
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "5684b9ab710326d1"
+            ]
+        ]
+    },
+    {
+        "id": "5684b9ab710326d1",
+        "type": "function",
+        "z": "login-flow",
+        "name": "preprocess",
+        "func": "if ( !global.get('authenticated'))\n    return [null , {payload:{message:'Please Login First'}}]\n\nlet username = global.get('currentUser');\nlet new_password = msg.payload.password\n\nconst authTable = Object\n.fromEntries(global.get('auth'));\n\nauthTable[username] =  new_password;\n\nreturn [ {payload:Object.entries(authTable)} ,\n{\n    payload:{\n        message:`Updated password for user ${username}`\n    }\n}\n]\n\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 500,
+        "wires": [
+            [
+                "a198ba0a8f7ee09b"
+            ],
+            [
+                "7caaee4cdc5c195e"
+            ]
+        ]
+    },
+    {
+        "id": "a198ba0a8f7ee09b",
+        "type": "GSheet",
+        "z": "login-flow",
+        "creds": "75f0767f084edb2d",
+        "method": "update",
+        "action": "",
+        "sheet": "1WDOMNNiOf1nsBzU2xE5ilt02XQw2OFqICUmibP-EJaA",
+        "cells": "auth!A:B",
+        "flatten": false,
+        "name": "",
+        "x": 650,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7caaee4cdc5c195e",
+        "type": "ui_text",
+        "z": "login-flow",
+        "group": "login-group",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "Change Password Status:",
+        "label": "Status:",
+        "format": "{{msg.payload.message}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 670,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "2c384c56ed9619f9",
+        "type": "inject",
+        "z": "login-flow",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "authenticated",
+        "payloadType": "global",
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "14aa901f182655de"
+            ]
+        ]
+    },
+    {
+        "id": "1fd546bb2ea7ae73",
+        "type": "ui_led",
+        "z": "login-flow",
+        "order": 1,
+        "group": "login-group",
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9764798f920afd99",
+        "type": "function",
+        "z": "login-flow",
+        "name": "reset Globs",
+        "func": "const keys = global.keys();\nkeys.forEach(key => global.set(key, undefined));\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "14aa901f182655de",
+        "type": "function",
+        "z": "login-flow",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload ? true : false;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "1fd546bb2ea7ae73"
+            ]
+        ]
     },
     {
         "id": "temp-chart",
