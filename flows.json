@@ -269,7 +269,13 @@
         "height": 1
     },
     {
-        "id": "75f0767f084edb2d",
+        "id": "cb7b12f45030da61",
+        "type": "firebase config",
+        "firebaseurl": "sleeptracker-us-db-default-rtdb",
+        "loginType": "none"
+    },
+    {
+        "id": "41cc11a7df67cd3b",
         "type": "gauth",
         "name": "iot-sleeptracker@iot-sleeptracker-auth.iam.gserviceaccount.com"
     },
@@ -323,8 +329,8 @@
         "type": "function",
         "z": "login-flow",
         "name": "Authentication Check",
-        "func": "// default is admin admin\nconst validUsers = global.get('auth')\n.reduce((prev, cur) => \n{prev[cur[0]]=cur[1]; return prev}, {});\n\nif (validUsers[msg.payload.username] === msg.payload.password) {\n    global.set('authenticated', true);\n    global.set('currentUser', msg.payload.username);\n    \n    msg.payload = {\n        message: 'Login successful! Please navigate to Dashboard tab to continue.',\n        user: msg.payload.username\n    };\n    \n   return msg;\n} else {\n    msg.payload = {\n        message: 'Invalid username or password. Please try again.'\n    };\n    return msg;\n}\n\nreturn null;",
-        "outputs": 1,
+        "func": "// default is admin admin\nconst validUsers = global.get('auth')\n.reduce((prev, cur) => \n{prev[cur[0]]=cur[1]; return prev}, {});\n\nif (validUsers[msg.payload.username] === msg.payload.password) {\n    global.set('authenticated', true);\n    global.set('currentUser', msg.payload.username);\n    \n    msg.payload = {\n        message: 'Login successful! Please navigate to Dashboard tab to continue.',\n        user: msg.payload.username\n    };\n    \n    return [msg, { payload: true }];\n} else {\n    msg.payload = {\n        message: 'Invalid username or password. Please try again.'\n    };\n    return [msg, {payload:false}];\n}\n\nreturn null;",
+        "outputs": 2,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
@@ -335,6 +341,9 @@
         "wires": [
             [
                 "login-result"
+            ],
+            [
+                "85fdcc147da8bfad"
             ]
         ]
     },
@@ -355,7 +364,7 @@
         "font": "",
         "fontSize": "",
         "color": "#000000",
-        "x": 630,
+        "x": 650,
         "y": 260,
         "wires": []
     },
@@ -363,7 +372,7 @@
         "id": "53018ebdbe40bfe5",
         "type": "GSheet",
         "z": "login-flow",
-        "creds": "75f0767f084edb2d",
+        "creds": "41cc11a7df67cd3b",
         "method": "get",
         "action": "",
         "sheet": "1WDOMNNiOf1nsBzU2xE5ilt02XQw2OFqICUmibP-EJaA",
@@ -412,7 +421,7 @@
         "id": "af22e085784a8977",
         "type": "function",
         "z": "login-flow",
-        "name": "set auth",
+        "name": "set auth (all user data) ",
         "func": "global.set('auth', msg.payload)\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -420,7 +429,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 640,
+        "x": 680,
         "y": 40,
         "wires": [
             []
@@ -475,7 +484,7 @@
         "id": "8e15fefd68814e53",
         "type": "GSheet",
         "z": "login-flow",
-        "creds": "75f0767f084edb2d",
+        "creds": "41cc11a7df67cd3b",
         "method": "append",
         "action": "",
         "sheet": "1WDOMNNiOf1nsBzU2xE5ilt02XQw2OFqICUmibP-EJaA",
@@ -596,7 +605,7 @@
         "id": "a198ba0a8f7ee09b",
         "type": "GSheet",
         "z": "login-flow",
-        "creds": "75f0767f084edb2d",
+        "creds": "41cc11a7df67cd3b",
         "method": "update",
         "action": "",
         "sheet": "1WDOMNNiOf1nsBzU2xE5ilt02XQw2OFqICUmibP-EJaA",
@@ -651,7 +660,7 @@
         "topic": "",
         "payload": "authenticated",
         "payloadType": "global",
-        "x": 380,
+        "x": 260,
         "y": 200,
         "wires": [
             [
@@ -727,6 +736,19 @@
                 "1fd546bb2ea7ae73"
             ]
         ]
+    },
+    {
+        "id": "85fdcc147da8bfad",
+        "type": "link out",
+        "z": "login-flow",
+        "name": "on authenticated",
+        "mode": "link",
+        "links": [
+            "739dd39314dd33ae"
+        ],
+        "x": 525,
+        "y": 300,
+        "wires": []
     },
     {
         "id": "temp-chart",
@@ -952,8 +974,7 @@
             ],
             [
                 "overall-quality-chart",
-                "415aa5547f155409",
-                "60b0fe105507d764"
+                "415aa5547f155409"
             ]
         ]
     },
@@ -978,11 +999,11 @@
         "topic": "",
         "payload": "{\"temp\":65.2,\"humidity\":63.5,\"lightlevel\":63.5,\"timestamp\":1755264040}",
         "payloadType": "json",
-        "x": 170,
+        "x": 90,
         "y": 300,
         "wires": [
             [
-                "dfa7d43bac128aab"
+                "ef3a2a42af7e349f"
             ]
         ]
     },
@@ -990,15 +1011,15 @@
         "id": "415aa5547f155409",
         "type": "function",
         "z": "environment-flow",
-        "name": "function 2",
-        "func": "let buffer = flow.get(\"buffer\")\nif ( ! buffer ) {\n    buffer = [];\n}\n\nbuffer.push(msg.payload);\nlet envAvg = buffer.reduce((a, b) => a + b) / buffer.length;\nglobal.set(\"EnvAvg\", envAvg )\nflow.set(\"buffer\", buffer);\nreturn envAvg;",
+        "name": "buffering and calculate average",
+        "func": "let buffer = flow.get(\"buffer\")\nif ( ! buffer ) {\n    buffer = [];\n}\n\nbuffer.push(msg.payload);\nlet envAvg = buffer.reduce((a, b) => a + b) / buffer.length;\nglobal.set(\"EnvAvg\", envAvg )\nflow.set(\"buffer\", buffer);\nreturn {payload:envAvg};",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
+        "x": 750,
         "y": 360,
         "wires": [
             [
@@ -1010,32 +1031,17 @@
         "id": "2b274d557327cfb6",
         "type": "debug",
         "z": "environment-flow",
-        "name": "debug 3",
+        "name": "mqtt in",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 320,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "60b0fe105507d764",
-        "type": "debug",
-        "z": "environment-flow",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 680,
-        "y": 420,
+        "x": 110,
+        "y": 140,
         "wires": []
     },
     {
@@ -1050,11 +1056,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 290,
-        "y": 200,
+        "x": 250,
+        "y": 240,
         "wires": [
             [
-                "dfa7d43bac128aab"
+                "dfa7d43bac128aab",
+                "b4ba8a977718dcad"
             ]
         ]
     },
@@ -1067,9 +1074,231 @@
         "links": [
             "3258e9215e94e367"
         ],
-        "x": 795,
+        "x": 925,
         "y": 360,
         "wires": []
+    },
+    {
+        "id": "0d553f6fb9e3b914",
+        "type": "firebase modify",
+        "z": "environment-flow",
+        "name": "",
+        "firebaseconfig": "cb7b12f45030da61",
+        "childpath": "msg.childpath",
+        "method": "push",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 740,
+        "y": 440,
+        "wires": [
+            [
+                "90f977792246b3ad"
+            ]
+        ]
+    },
+    {
+        "id": "90f977792246b3ad",
+        "type": "debug",
+        "z": "environment-flow",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "bd8840c83e105f79",
+        "type": "firebase auth",
+        "z": "environment-flow",
+        "name": "",
+        "firebaseconfig": "cb7b12f45030da61",
+        "x": 250,
+        "y": 620,
+        "wires": [
+            [
+                "3cfd358daedd6eae"
+            ]
+        ]
+    },
+    {
+        "id": "3cfd358daedd6eae",
+        "type": "debug",
+        "z": "environment-flow",
+        "name": "firebase config change announce",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "64b2367854816417",
+        "type": "firebase.on",
+        "z": "environment-flow",
+        "name": "",
+        "firebaseconfig": "cb7b12f45030da61",
+        "childpath": "",
+        "atStart": true,
+        "eventType": "value",
+        "queries": [],
+        "x": 250,
+        "y": 560,
+        "wires": [
+            [
+                "fe3426c3848b16eb",
+                "b0698f60c961b98a"
+            ]
+        ]
+    },
+    {
+        "id": "fe3426c3848b16eb",
+        "type": "function",
+        "z": "environment-flow",
+        "name": "set history globs",
+        "func": "global.set('history', msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4ba8a977718dcad",
+        "type": "function",
+        "z": "environment-flow",
+        "name": "append user",
+        "func": "msg.childpath=global.get('currentUser');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 440,
+        "wires": [
+            [
+                "0d553f6fb9e3b914"
+            ]
+        ]
+    },
+    {
+        "id": "739dd39314dd33ae",
+        "type": "link in",
+        "z": "environment-flow",
+        "name": "link in 2",
+        "links": [
+            "85fdcc147da8bfad"
+        ],
+        "x": 245,
+        "y": 40,
+        "wires": [
+            [
+                "f7b3d0e626490c42"
+            ]
+        ]
+    },
+    {
+        "id": "f7b3d0e626490c42",
+        "type": "function",
+        "z": "environment-flow",
+        "name": "get history",
+        "func": "let history = global.get('history')\nlet userHistory = history[global.get('currentUser')];\nfor (let packet of Object.values(userHistory))\n    node.send({payload:packet});\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "dfa7d43bac128aab",
+                "76a588eaee49ab15"
+            ]
+        ]
+    },
+    {
+        "id": "76a588eaee49ab15",
+        "type": "debug",
+        "z": "environment-flow",
+        "name": "firebase",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b0698f60c961b98a",
+        "type": "debug",
+        "z": "environment-flow",
+        "name": "get db",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "078112d3b3375953",
+        "type": "inject",
+        "z": "environment-flow",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "f7b3d0e626490c42"
+            ]
+        ]
     },
     {
         "id": "sleep-data-generator",
