@@ -2,7 +2,12 @@
     "name": "iot",
     "description": "A Node-RED Project",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "node-red-contrib-google-sheets": "^1.1.2",
+        "node-red-contrib-ui-led": "^0.4.11",
+        "node-red-dashboard": "^3.6.6",
+        "node-red-firebase": "^0.1.0"
+    },
     "node-red": {
         "settings": {
             "flowFile": "flows.json",
