@@ -358,20 +358,6 @@
         "disabled": "false"
     },
     {
-        "id": "096cf77441ce34c4",
-        "type": "ui-group",
-        "name": "Group 1",
-        "page": "5d50083648cbcba6",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": true,
-        "disabled": false,
-        "groupType": "default"
-    },
-    {
         "id": "login-form",
         "type": "ui_form",
         "z": "login-flow",
@@ -1001,7 +987,7 @@
         "type": "function",
         "z": "environment-flow",
         "name": "splitter",
-        "func": "msg.payload.timestamp = msg.payload.timestamp * 1000 - 25200000;\n\nlet attrs = [\"temp\", \"humidity\", \"lightlevel\"];\nlet outputs = [];\n\nfor (let attr of attrs) {\n    outputs.push({\n        payload: msg.payload[attr],\n        timestamp: msg.payload.timestamp,\n        topic: attr,\n    });\n}\n\nif (attrs.every(attr => msg.payload[attr] !== undefined)) {\n    outputs.push({\n        payload:\n            Math.max(\n                0,\n                100 -\n                    Math.abs(msg.payload.temp - 24) -\n                    Math.abs(msg.payload.humidity - 60) -\n                    msg.payload.lightlevel\n            ) / 10,\n        timestamp: msg.payload.timestamp,\n        topic: \"overall\",\n    });\n}\n\nreturn outputs;",
+        "func": "msg.payload.timestamp = msg.payload.timestamp * 1000 - 25200000;\n\nlet attrs = [\"temp\", \"humidity\", \"lightlevel\"];\nlet outputs = [];\n\nfor (let attr of attrs) {\n    outputs.push({\n        payload: msg.payload[attr],\n        timestamp: msg.payload.timestamp,\n        topic: attr,\n    });\n}\n\nif (attrs.every(attr => msg.payload[attr] !== undefined)) {\n    outputs.push({\n        payload:\n            Math.max(\n                0,\n                100 -\n                    Math.abs(msg.payload.temp - 24) -\n                    Math.abs(msg.payload.humidity - 60) -\n                    msg.payload.lightlevel\n            ) / 10,\n        timestamp: msg.payload.timestamp,\n        topic: \"overall\",\n    });\n} else\n    outputs.push(undefined);\n\nreturn outputs;",
         "outputs": 4,
         "timeout": 0,
         "noerr": 0,
@@ -1012,7 +998,8 @@
         "y": 200,
         "wires": [
             [
-                "temp-chart"
+                "temp-chart",
+                "ad92766c3e933c03"
             ],
             [
                 "humidity-chart"
@@ -1023,35 +1010,6 @@
             [
                 "overall-quality-chart",
                 "415aa5547f155409"
-            ]
-        ]
-    },
-    {
-        "id": "809ab8d91dd04bfd",
-        "type": "inject",
-        "z": "environment-flow",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"temp\":65.2,\"humidity\":63.5,\"lightlevel\":63.5,\"timestamp\":1755264040}",
-        "payloadType": "json",
-        "x": 90,
-        "y": 300,
-        "wires": [
-            [
-                "ef3a2a42af7e349f"
             ]
         ]
     },
@@ -1080,7 +1038,7 @@
         "type": "debug",
         "z": "environment-flow",
         "name": "mqtt in",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1149,7 +1107,7 @@
         "type": "debug",
         "z": "environment-flow",
         "name": "debug 1",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1179,7 +1137,7 @@
         "type": "debug",
         "z": "environment-flow",
         "name": "firebase config change announce",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1269,7 +1227,7 @@
         "type": "function",
         "z": "environment-flow",
         "name": "get history",
-        "func": "let history = global.get('history')\nlet userHistory = history[global.get('currentUser')];\nlet wait = 0;\nfor (let packet of Object.values(userHistory)){\n    setTimeout( () => node.send({ payload: packet }), wait * 500);\n    wait = wait + 1;\n}\nreturn null;",
+        "func": "let history = global.get('history')\nlet userHistory = history[global.get('currentUser')];\nlet wait = 0;\nfor (let packet of Object.values(userHistory)){\n    setTimeout( () => node.send({ payload: packet }), wait * 100);\n    wait = wait + 1;\n}\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1290,7 +1248,7 @@
         "type": "debug",
         "z": "environment-flow",
         "name": "firebase",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1307,7 +1265,7 @@
         "type": "debug",
         "z": "environment-flow",
         "name": "get db",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1423,6 +1381,22 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "ad92766c3e933c03",
+        "type": "debug",
+        "z": "environment-flow",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 40,
+        "wires": []
     },
     {
         "id": "sleep-data-generator",
