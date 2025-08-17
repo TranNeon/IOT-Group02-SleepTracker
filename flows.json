@@ -45,6 +45,53 @@
         "env": []
     },
     {
+        "id": "e28f2d721c3e9a33",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cloud-sync-flow",
+        "type": "tab",
+        "label": "Cloud Sync (Firebase)",
+        "disabled": false,
+        "info": "Flow to continuously update a single JSON object to Firebase with sensor data from MQTT.",
+        "env": []
+    },
+    {
+        "id": "07391ca88541455f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "login-tab",
         "type": "ui_tab",
         "name": "Login",
@@ -91,37 +138,6 @@
         "width": "12",
         "collapse": false,
         "className": ""
-    },
-    {
-        "id": "07391ca88541455f",
-        "type": "mqtt-broker",
-        "name": "",
-        "broker": "test.mosquitto.org",
-        "port": 1883,
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": 4,
-        "keepalive": 60,
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
     },
     {
         "id": "44790f209ca2adcd",
@@ -183,6 +199,13 @@
         "id": "41cc11a7df67cd3b",
         "type": "gauth",
         "name": "iot-sleeptracker@iot-sleeptracker-auth.iam.gserviceaccount.com"
+    },
+    {
+        "id": "new-firebase-config-sleeptracker",
+        "type": "firebase config",
+        "name": "SleepTracker Project Config",
+        "firebaseurl": "https://sleeptracker-edb97-default-rtdb.asia-southeast1.firebasedatabase.app",
+        "loginType": "none"
     },
     {
         "id": "login-form",
@@ -896,24 +919,6 @@
         "wires": []
     },
     {
-        "id": "0d553f6fb9e3b914",
-        "type": "firebase modify",
-        "z": "environment-flow",
-        "name": "",
-        "firebaseconfig": "cb7b12f45030da61",
-        "childpath": "msg.childpath",
-        "method": "push",
-        "value": "msg.payload",
-        "priority": "msg.priority",
-        "x": 740,
-        "y": 440,
-        "wires": [
-            [
-                "90f977792246b3ad"
-            ]
-        ]
-    },
-    {
         "id": "90f977792246b3ad",
         "type": "debug",
         "z": "environment-flow",
@@ -1210,6 +1215,16 @@
         "wires": []
     },
     {
+        "id": "0d553f6fb9e3b914",
+        "type": "firebase modify",
+        "z": "environment-flow",
+        "name": "",
+        "method": "push",
+        "x": 740,
+        "y": 440,
+        "wires": []
+    },
+    {
         "id": "sleep-data-generator",
         "type": "function",
         "z": "sleep-flow",
@@ -1433,22 +1448,6 @@
         "wires": []
     },
     {
-        "id": "3403c4d8a27380f7",
-        "type": "firebase modify",
-        "z": "sleep-flow",
-        "name": "",
-        "firebaseconfig": "cb7b12f45030da61",
-        "childpath": "msg.childpath",
-        "method": "push",
-        "value": "msg.payload",
-        "priority": "msg.priority",
-        "x": 840,
-        "y": 620,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "f889b40db530daa9",
         "type": "function",
         "z": "sleep-flow",
@@ -1593,22 +1592,6 @@
             [
                 "2ad9f73558b6cfc0"
             ]
-        ]
-    },
-    {
-        "id": "e0797b1ed7bc4763",
-        "type": "firebase modify",
-        "z": "sleep-flow",
-        "name": "",
-        "firebaseconfig": "cb7b12f45030da61",
-        "childpath": "msg.childpath",
-        "method": "push",
-        "value": "msg.payload",
-        "priority": "msg.priority",
-        "x": 940,
-        "y": 360,
-        "wires": [
-            []
         ]
     },
     {
@@ -1859,6 +1842,26 @@
         ],
         "x": 985,
         "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3403c4d8a27380f7",
+        "type": "firebase modify",
+        "z": "sleep-flow",
+        "name": "",
+        "method": "push",
+        "x": 840,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "e0797b1ed7bc4763",
+        "type": "firebase modify",
+        "z": "sleep-flow",
+        "name": "",
+        "method": "push",
+        "x": 940,
+        "y": 360,
         "wires": []
     },
     {
@@ -2616,6 +2619,86 @@
         "wires": [
             [
                 "ccda619479c0b739"
+            ]
+        ]
+    },
+    {
+        "id": "a1b2c3d4e5f6a7b8",
+        "type": "mqtt in",
+        "z": "cloud-sync-flow",
+        "name": "Listen for ESP32 Sensor Data",
+        "topic": "23127302/sense",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "07391ca88541455f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 200,
+        "wires": [
+            [
+                "b1c2d3e4f5a6b7c8"
+            ]
+        ]
+    },
+    {
+        "id": "b1c2d3e4f5a6b7c8",
+        "type": "function",
+        "z": "cloud-sync-flow",
+        "name": "Build & Update Sensor JSON",
+        "func": "// --- Cấu hình ---\n// Giới hạn số lượng điểm dữ liệu cho mỗi loại để file JSON không quá lớn\nconst MAX_DATA_POINTS = 100;\n\n// --- Bắt đầu xử lý ---\n\n// Lấy đối tượng JSON tổng hợp từ 'flow context' (bộ nhớ của luồng)\n// Nếu chưa có, tạo một đối tượng rỗng\nlet sensorData = flow.get(\"sensorData\") || {\n    temperature: [],\n    humidity: [],\n    light: [],\n    movement: [],\n    overallQuality: []\n};\n\n// Lấy dữ liệu mới từ ESP32 (msg.payload)\nconst newData = msg.payload;\n\n// Lấy timestamp, giả sử ESP32 gửi unixtime\nconst timestamp = newData.timestamp; \n\n// Hàm trợ giúp để thêm dữ liệu mới và xóa dữ liệu cũ\nfunction updateDataArray(arr, value) {\n    if (value !== undefined && value !== null) {\n        arr.push({ x: timestamp, y: value });\n        // Nếu mảng dài hơn giới hạn, xóa phần tử đầu tiên (cũ nhất)\n        if (arr.length > MAX_DATA_POINTS) {\n            arr.shift();\n        }\n    }\n}\n\n// Cập nhật từng mảng dữ liệu với giá trị mới\nupdateDataArray(sensorData.temperature, newData.temp);\nupdateDataArray(sensorData.humidity, newData.humidity);\nupdateDataArray(sensorData.light, newData.lightlevel);\n\n// Tính toán và cập nhật overallQuality (dựa trên công thức trong file flows.json của bạn)\nconst quality = Math.max(0, 100 - Math.abs(newData.temp - 24) - Math.abs(newData.humidity - 60) - newData.lightlevel) / 10;\nupdateDataArray(sensorData.overallQuality, quality);\n\n// Lưu lại đối tượng JSON đã cập nhật vào bộ nhớ của luồng\nflow.set(\"sensorData\", sensorData);\n\n// Gán đối tượng hoàn chỉnh này vào msg.payload để gửi tới Firebase\nmsg.payload = sensorData;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "c1d2e3f4a5b6c7d8"
+            ]
+        ]
+    },
+    {
+        "id": "c1d2e3f4a5b6c7d8",
+        "type": "firebase modify",
+        "z": "cloud-sync-flow",
+        "name": "Save to Firebase",
+        "method": "set",
+        "x": 720,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9d61f778729958bb",
+        "type": "inject",
+        "z": "cloud-sync-flow",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temp\":25.5,\"humidity\":68,\"lightlevel\":350,\"timestamp\":1755608230}",
+        "payloadType": "json",
+        "x": 450,
+        "y": 340,
+        "wires": [
+            [
+                "b1c2d3e4f5a6b7c8"
             ]
         ]
     }
