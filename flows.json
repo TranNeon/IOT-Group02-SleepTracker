@@ -651,7 +651,9 @@
         "name": "on authenticated",
         "mode": "link",
         "links": [
-            "739dd39314dd33ae"
+            "739dd39314dd33ae",
+            "36f97f797365140f",
+            "d80143caf24d6e82"
         ],
         "x": 525,
         "y": 300,
@@ -673,8 +675,8 @@
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
-        "ymin": "0",
-        "ymax": "100",
+        "ymin": "",
+        "ymax": "",
         "removeOlder": 1,
         "removeOlderPoints": "",
         "removeOlderUnit": "604800",
@@ -717,8 +719,8 @@
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
-        "ymin": "0",
-        "ymax": "100",
+        "ymin": "",
+        "ymax": "",
         "removeOlder": 1,
         "removeOlderPoints": "",
         "removeOlderUnit": "604800",
@@ -838,26 +840,6 @@
             ],
             [
                 "overall-quality-chart",
-                "415aa5547f155409"
-            ]
-        ]
-    },
-    {
-        "id": "415aa5547f155409",
-        "type": "function",
-        "z": "environment-flow",
-        "name": "buffering and calculate average",
-        "func": "let buffer = flow.get(\"buffer\")\nif ( ! buffer ) {\n    buffer = [];\n}\n\nbuffer.push(msg.payload);\nlet envAvg = buffer.reduce((a, b) => a + b) / buffer.length;\nglobal.set(\"EnvAvg\", envAvg )\nflow.set(\"buffer\", buffer);\nreturn {payload:envAvg.toFixed(2)};",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 750,
-        "y": 360,
-        "wires": [
-            [
                 "749a4c73a1387e12"
             ]
         ]
@@ -909,8 +891,8 @@
         "links": [
             "3258e9215e94e367"
         ],
-        "x": 925,
-        "y": 360,
+        "x": 835,
+        "y": 340,
         "wires": []
     },
     {
@@ -1183,8 +1165,8 @@
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
-        "ymin": "10",
-        "ymax": "35",
+        "ymin": "",
+        "ymax": "",
         "removeOlder": 1,
         "removeOlderPoints": "",
         "removeOlderUnit": "604800",
@@ -1216,7 +1198,7 @@
         "type": "debug",
         "z": "environment-flow",
         "name": "debug 3",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1232,27 +1214,29 @@
         "type": "function",
         "z": "sleep-flow",
         "name": "split",
-        "func": "\n\nreturn null;",
+        "func": "\n\n// msg.payload.start = msg.payload.start  - 25200000;\n// msg.payload.end = msg.payload.end  - 25200000;\n\nlet attrs = [\"start\", \"end\", \"duration\", \"quality\"];\nlet outputs = [];\n\noutputs.push({\n        payload: ( new Date(msg.payload.start/1000)).getHours(),\n        timestamp: msg.payload.end - 25200000,\n    });\n\noutputs.push({\n        payload: ( new Date(msg.payload.end/1000)).getHours(),\n        timestamp: msg.payload.end - 25200000,\n    });\noutputs.push({\n        payload: msg.payload.duration,\n        timestamp: msg.payload.end - 25200000,\n    });\n\noutputs.push({\n    payload: msg.payload.quality,\n    timestamp: msg.payload.end - 25200000,\n});\n\nreturn outputs;",
         "outputs": 4,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 140,
+        "x": 770,
+        "y": 160,
         "wires": [
             [
-                "sleep-quality-chart"
-            ],
-            [
-                "start-time-chart"
+                "start-time-chart",
+                "37d845e9bf6a534d"
             ],
             [
                 "end-time-chart"
             ],
             [
-                "movement-chart"
+                "de5e16672ad3bca2"
+            ],
+            [
+                "sleep-quality-chart",
+                "2cda573f06ebdbc4"
             ]
         ]
     },
@@ -1268,23 +1252,34 @@
         "label": "Overall Quality (pts)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "dd/mm",
+        "xformat": "D/M",
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
-        "ymin": "0",
-        "ymax": "100",
+        "ymin": "",
+        "ymax": "",
         "removeOlder": 1,
         "removeOlderPoints": "",
         "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#667eea"
+            "#667eea",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 640,
-        "y": 100,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 240,
         "wires": [
             []
         ]
@@ -1301,23 +1296,34 @@
         "label": "Starting Time (h)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "dd/mm",
+        "xformat": "D/M",
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
-        "ymin": "18",
-        "ymax": "24",
+        "ymin": "",
+        "ymax": "",
         "removeOlder": 1,
         "removeOlderPoints": "",
         "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#764ba2"
+            "#764ba2",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 640,
-        "y": 150,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 120,
         "wires": [
             []
         ]
@@ -1331,26 +1337,37 @@
         "order": 3,
         "width": 6,
         "height": 4,
-        "label": "Ending Time (h)",
+        "label": "Ending Time ",
         "chartType": "line",
         "legend": "false",
-        "xformat": "dd/mm",
+        "xformat": "D/M",
         "interpolate": "linear",
         "nodata": "No data",
         "dot": false,
-        "ymin": "4",
-        "ymax": "10",
+        "ymin": "",
+        "ymax": "",
         "removeOlder": 1,
         "removeOlderPoints": "",
         "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#f093fb"
+            "#f093fb",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 640,
-        "y": 200,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 160,
         "wires": [
             []
         ]
@@ -1364,13 +1381,13 @@
         "order": 4,
         "width": 6,
         "height": 4,
-        "label": "Movement During Sleep (pts)",
+        "label": "Movement During Sleep ",
         "chartType": "line",
         "legend": "false",
-        "xformat": "dd/mm",
+        "xformat": "dd HH:mm",
         "interpolate": "linear",
         "nodata": "No data",
-        "dot": false,
+        "dot": true,
         "ymin": "0",
         "ymax": "100",
         "removeOlder": 1,
@@ -1378,12 +1395,23 @@
         "removeOlderUnit": "604800",
         "cutout": 0,
         "useOneColor": false,
+        "useUTC": false,
         "colors": [
-            "#ff9a9e"
+            "#ff9a9e",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
         ],
         "outputs": 1,
-        "x": 640,
-        "y": 250,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 500,
         "wires": [
             []
         ]
@@ -1400,8 +1428,437 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 620,
+        "x": 560,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3403c4d8a27380f7",
+        "type": "firebase modify",
+        "z": "sleep-flow",
+        "name": "",
+        "firebaseconfig": "cb7b12f45030da61",
+        "childpath": "msg.childpath",
+        "method": "push",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 840,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f889b40db530daa9",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "append directory",
+        "func": "msg.childpath=\"pir/\" + global.get('currentUser');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 620,
+        "wires": [
+            [
+                "3403c4d8a27380f7"
+            ]
+        ]
+    },
+    {
+        "id": "8b1be76b99d145aa",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "f889b40db530daa9",
+                "7c58d21181a67838"
+            ]
+        ]
+    },
+    {
+        "id": "94f8a697934441ab",
+        "type": "mqtt in",
+        "z": "sleep-flow",
+        "name": "",
+        "topic": "sleeptracker/pir",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "07391ca88541455f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 520,
+        "wires": [
+            [
+                "8b1be76b99d145aa"
+            ]
+        ]
+    },
+    {
+        "id": "7c58d21181a67838",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "preprocess",
+        "func": "msg.payload.timestamp = msg.payload.timestamp*1000 - 7 *3600000;\nnode.send( {payload:100, timestamp:msg.payload.timestamp})\n\nnode.send( {payload:0, timestamp:msg.payload.timestamp})\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 500,
+        "wires": [
+            [
+                "movement-chart"
+            ]
+        ]
+    },
+    {
+        "id": "72d9562ed7bca841",
+        "type": "inject",
+        "z": "sleep-flow",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 420,
+        "wires": [
+            [
+                "2ad9f73558b6cfc0"
+            ]
+        ]
+    },
+    {
+        "id": "2ad9f73558b6cfc0",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "get pir history",
+        "func": "let history = global.get('history')\nlet userHistory = history.pir[global.get('currentUser')];\nlet wait = 0;\nfor (let packet of Object.values(userHistory)){\n    setTimeout( () => node.send({ payload: packet }), wait * 100);\n    wait = wait + 1;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 420,
+        "wires": [
+            [
+                "7c58d21181a67838"
+            ]
+        ]
+    },
+    {
+        "id": "36f97f797365140f",
+        "type": "link in",
+        "z": "sleep-flow",
+        "name": "link in 3",
+        "links": [
+            "85fdcc147da8bfad"
+        ],
+        "x": 205,
+        "y": 360,
+        "wires": [
+            [
+                "2ad9f73558b6cfc0"
+            ]
+        ]
+    },
+    {
+        "id": "e0797b1ed7bc4763",
+        "type": "firebase modify",
+        "z": "sleep-flow",
+        "name": "",
+        "firebaseconfig": "cb7b12f45030da61",
+        "childpath": "msg.childpath",
+        "method": "push",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 940,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e62983a1baba24ab",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "append directory",
+        "func": "msg.childpath=\"sleepData/\" + global.get('currentUser');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "e0797b1ed7bc4763"
+            ]
+        ]
+    },
+    {
+        "id": "da981848e565a806",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "AuthSwitch",
+        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "e62983a1baba24ab",
+                "sleep-data-generator",
+                "9619c783e2a40352"
+            ]
+        ]
+    },
+    {
+        "id": "2170a5fc0b395275",
+        "type": "mqtt in",
+        "z": "sleep-flow",
+        "name": "",
+        "topic": "ESP32-STC48613/sleep-data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "07391ca88541455f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "da981848e565a806"
+            ]
+        ]
+    },
+    {
+        "id": "8707720400d9573e",
+        "type": "inject",
+        "z": "sleep-flow",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "fac04470b1a02527"
+            ]
+        ]
+    },
+    {
+        "id": "fac04470b1a02527",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "get sleep-data history",
+        "func": "let history = global.get('history')\nlet userHistory = history.sleepData[global.get('currentUser')];\nlet wait = 0;\nfor (let packet of Object.values(userHistory)){\n    setTimeout( () => node.send({ payload: packet }), wait * 100);\n    wait = wait + 1;\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 140,
+        "wires": [
+            [
+                "sleep-data-generator"
+            ]
+        ]
+    },
+    {
+        "id": "d80143caf24d6e82",
+        "type": "link in",
+        "z": "sleep-flow",
+        "name": "link in 4",
+        "links": [
+            "85fdcc147da8bfad"
+        ],
+        "x": 175,
         "y": 40,
+        "wires": [
+            [
+                "fac04470b1a02527"
+            ]
+        ]
+    },
+    {
+        "id": "de5e16672ad3bca2",
+        "type": "ui_chart",
+        "z": "sleep-flow",
+        "name": "Duration chart (minutes )",
+        "group": "sleep-charts-group",
+        "order": 3,
+        "width": 6,
+        "height": 4,
+        "label": "Duration Chart (minutes)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "D/M",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#f093fb",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9375af12b505dc1",
+        "type": "function",
+        "z": "sleep-flow",
+        "name": "function 2",
+        "func": "node.send({\n    payload:{\n    \"start\": 1755440411000,\n    \"end\": 1755440411000,\n    \"duration\": 0,\n    \"quality\": 30\n} }\n)\n\nnode.send({\n    payload:{\n    \"start\": 1755940411000,\n    \"end\": 1755445411000,\n    \"duration\": 0,\n    \"quality\": 30\n} }\n)\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "da981848e565a806"
+            ]
+        ]
+    },
+    {
+        "id": "5d4c8b0353ea6447",
+        "type": "inject",
+        "z": "sleep-flow",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 340,
+        "wires": [
+            [
+                "c9375af12b505dc1"
+            ]
+        ]
+    },
+    {
+        "id": "37d845e9bf6a534d",
+        "type": "debug",
+        "z": "sleep-flow",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "2cda573f06ebdbc4",
+        "type": "link out",
+        "z": "sleep-flow",
+        "name": "sleep quality avg",
+        "mode": "link",
+        "links": [
+            "862cceed7a589cbd"
+        ],
+        "x": 985,
+        "y": 280,
         "wires": []
     },
     {
@@ -1451,50 +1908,6 @@
         "wires": []
     },
     {
-        "id": "e494f2c3eabf2566",
-        "type": "mqtt in",
-        "z": "4c5f97a5f0e24b71",
-        "name": "sleep-quality",
-        "topic": "ESP32-STC48613/sleep-quality",
-        "qos": "2",
-        "datatype": "utf8",
-        "broker": "07391ca88541455f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 210,
-        "y": 20,
-        "wires": [
-            [
-                "8b8f97311bdc9197",
-                "2698840de059b8a5"
-            ]
-        ]
-    },
-    {
-        "id": "d78be8eba57fa10f",
-        "type": "mqtt in",
-        "z": "4c5f97a5f0e24b71",
-        "name": "env-quality",
-        "topic": "ESP32-STC48613/env-quality",
-        "qos": "2",
-        "datatype": "utf8",
-        "broker": "07391ca88541455f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 220,
-        "y": 100,
-        "wires": [
-            [
-                "438bc3042b6d3aec",
-                "1400465acebb7efe"
-            ]
-        ]
-    },
-    {
         "id": "c386d072d7ba57d6",
         "type": "ui_chart",
         "z": "4c5f97a5f0e24b71",
@@ -1503,13 +1916,13 @@
         "order": 12,
         "width": 17,
         "height": 9,
-        "label": "historyChart",
+        "label": "History",
         "chartType": "line",
-        "legend": "false",
+        "legend": "true",
         "xformat": "auto",
         "interpolate": "linear",
         "nodata": "",
-        "dot": false,
+        "dot": true,
         "ymin": "",
         "ymax": "",
         "removeOlder": "9",
@@ -1519,8 +1932,8 @@
         "useOneColor": false,
         "useUTC": false,
         "colors": [
-            "#1f77b4",
-            "#aec7e8",
+            "#a51d2d",
+            "#613583",
             "#ff7f0e",
             "#2ca02c",
             "#98df8a",
@@ -1532,7 +1945,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 690,
+        "x": 680,
         "y": 80,
         "wires": [
             []
@@ -1548,7 +1961,7 @@
         "width": 20,
         "height": 7,
         "gtype": "gage",
-        "title": "sleep-quality-gauge",
+        "title": "Average Sleep Quality ",
         "label": "units",
         "format": "{{value}}",
         "min": 0,
@@ -1562,7 +1975,7 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 710,
+        "x": 720,
         "y": 20,
         "wires": []
     },
@@ -1576,7 +1989,7 @@
         "width": "20",
         "height": "7",
         "gtype": "gage",
-        "title": "env-quality-gauge",
+        "title": "Average Environment Quality",
         "label": "units",
         "format": "{{value}}",
         "min": 0,
@@ -1590,7 +2003,7 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 710,
+        "x": 740,
         "y": 140,
         "wires": []
     },
@@ -2079,78 +2492,59 @@
         ]
     },
     {
-        "id": "438bc3042b6d3aec",
-        "type": "function",
+        "id": "3258e9215e94e367",
+        "type": "link in",
         "z": "4c5f97a5f0e24b71",
-        "name": "AuthSwitch",
-        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
+        "name": "link in 1",
+        "links": [
+            "749a4c73a1387e12"
+        ],
+        "x": 215,
         "y": 140,
         "wires": [
             [
-                "947c4744d8311da6"
+                "415aa5547f155409",
+                "8d4b64871d58fad4"
             ]
         ]
     },
     {
-        "id": "8b8f97311bdc9197",
-        "type": "function",
+        "id": "862cceed7a589cbd",
+        "type": "link in",
         "z": "4c5f97a5f0e24b71",
-        "name": "AuthSwitch",
-        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
+        "name": "link in 5",
+        "links": [
+            "2cda573f06ebdbc4"
+        ],
+        "x": 205,
         "y": 20,
         "wires": [
             [
-                "ccda619479c0b739"
+                "0af2fe2bf2c56dc1",
+                "7c9beffa390f6cb7"
             ]
         ]
     },
     {
-        "id": "1400465acebb7efe",
-        "type": "function",
+        "id": "7c9beffa390f6cb7",
+        "type": "change",
         "z": "4c5f97a5f0e24b71",
-        "name": "AuthSwitch",
-        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 100,
-        "wires": [
-            [
-                "c386d072d7ba57d6"
-            ]
-        ]
-    },
-    {
-        "id": "2698840de059b8a5",
-        "type": "function",
-        "z": "4c5f97a5f0e24b71",
-        "name": "AuthSwitch",
-        "func": "if (!global.get('authenticated')) {\n    return null;\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Sleep Quality",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
         "y": 60,
         "wires": [
             [
@@ -2159,18 +2553,69 @@
         ]
     },
     {
-        "id": "3258e9215e94e367",
-        "type": "link in",
+        "id": "8d4b64871d58fad4",
+        "type": "change",
         "z": "4c5f97a5f0e24b71",
-        "name": "link in 1",
-        "links": [
-            "749a4c73a1387e12"
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Environement Quality",
+                "tot": "str"
+            }
         ],
-        "x": 245,
-        "y": 160,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 100,
         "wires": [
             [
-                "438bc3042b6d3aec"
+                "c386d072d7ba57d6"
+            ]
+        ]
+    },
+    {
+        "id": "415aa5547f155409",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "buffering and calculate average",
+        "func": "let buffer = flow.get(\"buffer\")\nif ( ! buffer ) {\n    buffer = [];\n}\nif(msg.payload){\n    buffer.push(msg.payload);\n    let envAvg = buffer.reduce((a, b) => a + b) / buffer.length;\n    global.set(\"EnvAvg\", envAvg )\n    flow.set(\"buffer\", buffer);\n    return {payload:envAvg.toFixed(2)};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "947c4744d8311da6"
+            ]
+        ]
+    },
+    {
+        "id": "0af2fe2bf2c56dc1",
+        "type": "function",
+        "z": "4c5f97a5f0e24b71",
+        "name": "buffering and calculate average",
+        "func": "let buffer = flow.get(\"buffersl\")\nif ( ! buffer ) {\n    buffer = [];\n}\nif(msg.payload){\n    buffer.push(msg.payload);\n    let sleepQualityAvg = buffer.reduce((a, b) => a + b) / buffer.length;\n    global.set(\"sleepQualityAvg\", sleepQualityAvg )\n    flow.set(\"buffersl\", buffer);\n    return {payload:sleepQualityAvg.toFixed(2)};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 20,
+        "wires": [
+            [
+                "ccda619479c0b739"
             ]
         ]
     }
