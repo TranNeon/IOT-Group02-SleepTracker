@@ -75,7 +75,7 @@
         "id": "ui_base",
         "type": "ui_base",
         "theme": {
-            "name": "theme-dark",
+            "name": "theme-light",
             "lightTheme": {
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
@@ -94,48 +94,49 @@
                 "name": "Sleep Tracking Theme",
                 "default": "#4B1A52",
                 "baseColor": "#4B1A52",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
             },
             "themeState": {
                 "base-color": {
-                    "default": "#097479",
-                    "value": "#097479",
+                    "default": "#0094CE",
+                    "value": "#0094CE",
                     "edited": false
                 },
                 "page-titlebar-backgroundColor": {
-                    "value": "#097479",
+                    "value": "#0094CE",
                     "edited": false
                 },
                 "page-backgroundColor": {
-                    "value": "#111111",
+                    "value": "#fafafa",
                     "edited": false
                 },
                 "page-sidebar-backgroundColor": {
-                    "value": "#333333",
+                    "value": "#ffffff",
                     "edited": false
                 },
                 "group-textColor": {
-                    "value": "#0eb8c0",
+                    "value": "#1bbfff",
                     "edited": false
                 },
                 "group-borderColor": {
-                    "value": "#555555",
+                    "value": "#ffffff",
                     "edited": false
                 },
                 "group-backgroundColor": {
-                    "value": "#333333",
+                    "value": "#ffffff",
                     "edited": false
                 },
                 "widget-textColor": {
-                    "value": "#eeeeee",
+                    "value": "#111111",
                     "edited": false
                 },
                 "widget-backgroundColor": {
-                    "value": "#097479",
+                    "value": "#0094ce",
                     "edited": false
                 },
                 "widget-borderColor": {
-                    "value": "#333333",
+                    "value": "#ffffff",
                     "edited": false
                 },
                 "base-font": {
@@ -153,7 +154,7 @@
             "name": "Sleep Tracking Clock",
             "hideToolbar": "false",
             "allowSwipe": "false",
-            "lockMenu": "false",
+            "lockMenu": "true",
             "allowTempTheme": "true",
             "dateFormat": "DD/MM/YYYY",
             "sizes": {
@@ -186,7 +187,8 @@
         "order": 1,
         "disp": true,
         "width": "12",
-        "collapse": false
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "07391ca88541455f",
@@ -224,6 +226,7 @@
         "type": "ui_tab",
         "name": "Dashboard",
         "icon": "dashboard",
+        "order": 2,
         "disabled": false,
         "hidden": false
     },
@@ -375,7 +378,7 @@
         "name": "Login Form",
         "label": "Sleep Tracking Clock - Login",
         "group": "login-group",
-        "order": 2,
+        "order": 1,
         "width": 0,
         "height": 0,
         "options": [
@@ -761,7 +764,7 @@
         "id": "1fd546bb2ea7ae73",
         "type": "ui_led",
         "z": "login-flow",
-        "order": 1,
+        "order": 2,
         "group": "login-group",
         "width": 0,
         "height": 0,
@@ -952,7 +955,7 @@
         "useOneColor": false,
         "useUTC": false,
         "colors": [
-            "#a8e6cf",
+            "#26a269",
             "#000000",
             "#000000",
             "#000000",
@@ -998,7 +1001,7 @@
         "type": "function",
         "z": "environment-flow",
         "name": "splitter",
-        "func": "msg.payload.timestamp = msg.payload.timestamp * 1000 - 25200000;\nnode.send([\n    {\n        payload:msg.payload.temp,\n        timestamp:msg.payload.timestamp,\n        topic:\"temp\",\n    }, \n    {\n        payload:msg.payload.humidity,\n        timestamp:msg.payload.timestamp,\n        topic:\"humidity\",\n    },\n    {\n        payload:msg.payload.lightlevel,\n        timestamp:msg.payload.timestamp,\n        topic:\"lightlevel\",\n    },\n    {\n        payload:Math.max(0, 100 - Math.abs(msg.payload.temp - 24) - Math.abs(msg.payload.humidity - 60) - msg.payload.lightlevel)/10 ,\n        timestamp:msg.payload.timestamp,\n        topic:\"overall\",\n    },\n    \n])\n\n\nreturn null;",
+        "func": "msg.payload.timestamp = msg.payload.timestamp * 1000 - 25200000;\n\nlet attrs = [\"temp\", \"humidity\", \"lightlevel\"];\nlet outputs = [];\n\nfor (let attr of attrs) {\n    outputs.push({\n        payload: msg.payload[attr],\n        timestamp: msg.payload.timestamp,\n        topic: attr,\n    });\n}\n\nif (attrs.every(attr => msg.payload[attr] !== undefined)) {\n    outputs.push({\n        payload:\n            Math.max(\n                0,\n                100 -\n                    Math.abs(msg.payload.temp - 24) -\n                    Math.abs(msg.payload.humidity - 60) -\n                    msg.payload.lightlevel\n            ) / 10,\n        timestamp: msg.payload.timestamp,\n        topic: \"overall\",\n    });\n}\n\nreturn outputs;",
         "outputs": 4,
         "timeout": 0,
         "noerr": 0,
@@ -1756,7 +1759,7 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 690,
+        "x": 710,
         "y": 20,
         "wires": []
     },
@@ -1784,7 +1787,7 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 690,
+        "x": 710,
         "y": 140,
         "wires": []
     },
@@ -2360,7 +2363,7 @@
         "links": [
             "749a4c73a1387e12"
         ],
-        "x": 255,
+        "x": 245,
         "y": 160,
         "wires": [
             [
