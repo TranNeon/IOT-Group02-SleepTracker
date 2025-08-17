@@ -72,104 +72,6 @@
         "hidden": false
     },
     {
-        "id": "ui_base",
-        "type": "ui_base",
-        "theme": {
-            "name": "theme-light",
-            "lightTheme": {
-                "default": "#0094CE",
-                "baseColor": "#0094CE",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": true,
-                "reset": false
-            },
-            "darkTheme": {
-                "default": "#097479",
-                "baseColor": "#097479",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": true,
-                "reset": false
-            },
-            "customTheme": {
-                "name": "Sleep Tracking Theme",
-                "default": "#4B1A52",
-                "baseColor": "#4B1A52",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "reset": false
-            },
-            "themeState": {
-                "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "widget-textColor": {
-                    "value": "#111111",
-                    "edited": false
-                },
-                "widget-backgroundColor": {
-                    "value": "#0094ce",
-                    "edited": false
-                },
-                "widget-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "base-font": {
-                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-                }
-            },
-            "angularTheme": {
-                "primary": "indigo",
-                "accents": "blue",
-                "warn": "red",
-                "background": "grey"
-            }
-        },
-        "site": {
-            "name": "Sleep Tracking Clock",
-            "hideToolbar": "false",
-            "allowSwipe": "false",
-            "lockMenu": "true",
-            "allowTempTheme": "true",
-            "dateFormat": "DD/MM/YYYY",
-            "sizes": {
-                "sx": 48,
-                "sy": 48,
-                "gx": 6,
-                "gy": 6,
-                "cx": 6,
-                "cy": 6,
-                "px": 0,
-                "py": 0
-            }
-        }
-    },
-    {
         "id": "login-group",
         "type": "ui_group",
         "name": "Login",
@@ -257,7 +159,7 @@
         "z": "4c5f97a5f0e24b71",
         "name": "spacer",
         "group": "923fa8921ff9b099",
-        "order": 7,
+        "order": 10,
         "width": 10,
         "height": 1
     },
@@ -281,81 +183,6 @@
         "id": "41cc11a7df67cd3b",
         "type": "gauth",
         "name": "iot-sleeptracker@iot-sleeptracker-auth.iam.gserviceaccount.com"
-    },
-    {
-        "id": "c9ba07264dcdb2d4",
-        "type": "ui-base",
-        "name": "My Dashboard",
-        "path": "/dashboard",
-        "appIcon": "",
-        "includeClientData": true,
-        "acceptsClientConfig": [
-            "ui-notification",
-            "ui-control"
-        ],
-        "showPathInSidebar": false,
-        "headerContent": "page",
-        "navigationStyle": "default",
-        "titleBarStyle": "default",
-        "showReconnectNotification": true,
-        "notificationDisplayTime": 1,
-        "showDisconnectNotification": true,
-        "allowInstall": true
-    },
-    {
-        "id": "09fdae3a384fe316",
-        "type": "ui-theme",
-        "name": "Default Theme",
-        "colors": {
-            "surface": "#ffffff",
-            "primary": "#0094CE",
-            "bgPage": "#eeeeee",
-            "groupBg": "#ffffff",
-            "groupOutline": "#cccccc"
-        },
-        "sizes": {
-            "density": "default",
-            "pagePadding": "12px",
-            "groupGap": "12px",
-            "groupBorderRadius": "4px",
-            "widgetGap": "12px"
-        }
-    },
-    {
-        "id": "5d50083648cbcba6",
-        "type": "ui-page",
-        "name": "Page 1",
-        "ui": "c9ba07264dcdb2d4",
-        "path": "/page1",
-        "icon": "home",
-        "layout": "grid",
-        "theme": "09fdae3a384fe316",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": 0,
-                "cols": 3
-            },
-            {
-                "name": "Tablet",
-                "px": 576,
-                "cols": 6
-            },
-            {
-                "name": "Small Desktop",
-                "px": 768,
-                "cols": 9
-            },
-            {
-                "name": "Desktop",
-                "px": 1024,
-                "cols": 12
-            }
-        ],
-        "order": 1,
-        "className": "",
-        "visible": "true",
-        "disabled": "false"
     },
     {
         "id": "login-form",
@@ -457,7 +284,7 @@
         "cells": "auth!A:B",
         "flatten": false,
         "name": "",
-        "x": 450,
+        "x": 590,
         "y": 40,
         "wires": [
             [
@@ -507,7 +334,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
+        "x": 880,
         "y": 40,
         "wires": [
             []
@@ -587,11 +414,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
+        "x": 310,
         "y": 340,
         "wires": [
             [
-                "8e15fefd68814e53"
+                "8e15fefd68814e53",
+                "53018ebdbe40bfe5"
             ],
             [
                 "9a72ea69d87fdde7"
@@ -668,11 +496,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
+        "x": 390,
         "y": 500,
         "wires": [
             [
-                "a198ba0a8f7ee09b"
+                "a198ba0a8f7ee09b",
+                "53018ebdbe40bfe5"
             ],
             [
                 "7caaee4cdc5c195e"
@@ -1394,7 +1223,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 920,
+        "x": 900,
         "y": 40,
         "wires": []
     },
@@ -1744,8 +1573,8 @@
         "name": "",
         "group": "923fa8921ff9b099",
         "order": 11,
-        "width": 13,
-        "height": 9,
+        "width": "20",
+        "height": "7",
         "gtype": "gage",
         "title": "env-quality-gauge",
         "label": "units",
@@ -1902,7 +1731,7 @@
         "z": "4c5f97a5f0e24b71",
         "name": "",
         "group": "923fa8921ff9b099",
-        "order": 10,
+        "order": 9,
         "width": 10,
         "height": 1,
         "passthru": false,
@@ -1961,7 +1790,7 @@
         "label": "min",
         "tooltip": "",
         "group": "923fa8921ff9b099",
-        "order": 9,
+        "order": 8,
         "width": 5,
         "height": 1,
         "wrap": false,
@@ -1989,7 +1818,7 @@
         "label": "hour",
         "tooltip": "",
         "group": "923fa8921ff9b099",
-        "order": 8,
+        "order": 7,
         "width": 5,
         "height": 1,
         "wrap": false,
